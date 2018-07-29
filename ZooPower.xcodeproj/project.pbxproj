@@ -7,21 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091F28828B2450BB672DAD73 /* Pods_ZooPower.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */; };
 		1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F730399210D4E610014BE1D /* AppDelegate.swift */; };
-		1F73039C210D4E610014BE1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F73039B210D4E610014BE1D /* ViewController.swift */; };
 		1F73039F210D4E610014BE1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F73039D210D4E610014BE1D /* Main.storyboard */; };
 		1F7303A1210D4E620014BE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7303A0210D4E620014BE1D /* Assets.xcassets */; };
 		1F7303A4210D4E620014BE1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F7303A2210D4E620014BE1D /* LaunchScreen.storyboard */; };
+		1F7303AC210D500D0014BE1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F7303AB210D500D0014BE1D /* GoogleService-Info.plist */; };
+		1FFFE357210D515400E95C4B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFE356210D515400E95C4B /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooPower.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F730396210D4E610014BE1D /* ZooPower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooPower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F730399210D4E610014BE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1F73039B210D4E610014BE1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1F73039E210D4E610014BE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1F7303A0210D4E620014BE1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F7303A3210D4E620014BE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F7303A5210D4E620014BE1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F7303AB210D500D0014BE1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1FFFE356210D515400E95C4B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.debug.xcconfig"; sourceTree = "<group>"; };
+		B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				091F28828B2450BB672DAD73 /* Pods_ZooPower.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				1F730398210D4E610014BE1D /* ZooPower */,
 				1F730397210D4E610014BE1D /* Products */,
+				44C796409338A28192616E40 /* Pods */,
+				FB43247B1EC1E3005D56A346 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +63,48 @@
 		1F730398210D4E610014BE1D /* ZooPower */ = {
 			isa = PBXGroup;
 			children = (
+				1FFFE355210D511B00E95C4B /* Storyboard */,
+				1FFFE354210D510F00E95C4B /* Controller */,
 				1F730399210D4E610014BE1D /* AppDelegate.swift */,
-				1F73039B210D4E610014BE1D /* ViewController.swift */,
-				1F73039D210D4E610014BE1D /* Main.storyboard */,
 				1F7303A0210D4E620014BE1D /* Assets.xcassets */,
-				1F7303A2210D4E620014BE1D /* LaunchScreen.storyboard */,
 				1F7303A5210D4E620014BE1D /* Info.plist */,
+				1F7303AB210D500D0014BE1D /* GoogleService-Info.plist */,
 			);
 			path = ZooPower;
+			sourceTree = "<group>";
+		};
+		1FFFE354210D510F00E95C4B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1FFFE356210D515400E95C4B /* LoginController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1FFFE355210D511B00E95C4B /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1F73039D210D4E610014BE1D /* Main.storyboard */,
+				1F7303A2210D4E620014BE1D /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		44C796409338A28192616E40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */,
+				B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FB43247B1EC1E3005D56A346 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +114,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F7303A8210D4E620014BE1D /* Build configuration list for PBXNativeTarget "ZooPower" */;
 			buildPhases = (
+				ADBC50054682A75CC30511DB /* [CP] Check Pods Manifest.lock */,
 				1F730392210D4E610014BE1D /* Sources */,
 				1F730393210D4E610014BE1D /* Frameworks */,
 				1F730394210D4E610014BE1D /* Resources */,
+				6C64E6E25EDC493507FBA28E /* [CP] Embed Pods Frameworks */,
+				C891F536BCEE245DED9D849B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,18 +171,92 @@
 				1F7303A4210D4E620014BE1D /* LaunchScreen.storyboard in Resources */,
 				1F7303A1210D4E620014BE1D /* Assets.xcassets in Resources */,
 				1F73039F210D4E610014BE1D /* Main.storyboard in Resources */,
+				1F7303AC210D500D0014BE1D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C64E6E25EDC493507FBA28E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADBC50054682A75CC30511DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZooPower-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C891F536BCEE245DED9D849B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F730392210D4E610014BE1D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F73039C210D4E610014BE1D /* ViewController.swift in Sources */,
 				1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */,
+				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,11 +400,13 @@
 		};
 		1F7303A9210D4E620014BE1D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RU645LY46;
 				INFOPLIST_FILE = ZooPower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,11 +420,13 @@
 		};
 		1F7303AA210D4E620014BE1D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RU645LY46;
 				INFOPLIST_FILE = ZooPower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
