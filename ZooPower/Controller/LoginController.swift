@@ -7,20 +7,30 @@
 //
 
 import UIKit
-import FBSDKLoginKit
 import Firebase
+import FBSDKLoginKit
+import GoogleSignIn
 
-class LoginController: UIViewController  {
+
+class LoginController: UIViewController , GIDSignInUIDelegate {
     
     var ref : DatabaseReference?
     
-    @IBOutlet weak var facebookLoginButton: UIButton!
-    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var facebookLoginButton: UIButton!{
+        didSet{
+            facebookLoginButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var googleLoginButton: UIButton!{
+        didSet{
+            googleLoginButton.layer.cornerRadius = 10
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
-  
     
     func showEmailAddress(){
         
@@ -68,5 +78,7 @@ class LoginController: UIViewController  {
     }
     
     @IBAction func googleLoginButton(_ sender: Any) {
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance()?.signIn()
     }
 }
