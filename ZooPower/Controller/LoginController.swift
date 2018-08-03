@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 
+
 class LoginController: UIViewController , GIDSignInUIDelegate {
     
     var ref : DatabaseReference?
@@ -61,8 +62,13 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             let values = ["email" : email , "name" : name , "picture" : picture ]
             self.ref = Database.database().reference()
             self.ref?.child("Users").child(id as! String).setValue(values)
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let newPage = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
+            newPage?.facebookID = id as! String
+            self.present(newPage!, animated: true, completion: nil)
         }
     }
+    
     
     
     
