@@ -48,7 +48,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             print("Successfully logged in with our user: ", user ?? "")
         })
         
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email , picture"]).start { (connection, result, err) in
             
             if err != nil {
                 print("Failed to start graph request:", err ?? "")
@@ -57,11 +57,10 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             
             //get user data to firebase
             let data = result as! NSDictionary
-            let id = data["id"] , email = data["email"] , name = data["name"]
-            let values = ["email" : email , "name" : name  ]
+            let id = data["id"] , email = data["email"] , name = data["name"] , picture = data["picture"]
+            let values = ["email" : email , "name" : name , "picture" : picture ]
             self.ref = Database.database().reference()
             self.ref?.child("Users").child(id as! String).setValue(values)
-           
         }
     }
     
