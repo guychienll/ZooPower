@@ -61,11 +61,11 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             let id = data["id"] , email = data["email"] , name = data["name"] , picture = data["picture"]
             let values = ["email" : email , "name" : name , "picture" : picture ]
             self.ref = Database.database().reference()
-            self.ref?.child("Users").child(id as! String).setValue(values)
+            self.ref?.child("Users").child(id as! String).updateChildValues(values as [AnyHashable : Any])
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            let newPage = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
-            newPage?.facebookID = id as! String
-            self.present(newPage!, animated: true, completion: nil)
+            let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
+            usersDataController?.facebookID = id as! String
+            self.present(usersDataController!, animated: true, completion: nil)
         }
     }
     

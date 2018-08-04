@@ -188,13 +188,13 @@
                                     <action selector="weightTextField:" destination="0cv-aV-VLe" eventType="editingDidEndOnExit" id="cmd-xC-MjI"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-57-wM6">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-57-wM6">
                                 <rect key="frame" x="113.5" y="309" width="241.5" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="gxZ-IJ-KGZ"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="nameTextField:" destination="0cv-aV-VLe" eventType="editingDidEndOnExit" id="fd6-xQ-ccA"/>
@@ -223,12 +223,13 @@
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ot3-90-NyL">
                                 <rect key="frame" x="20" y="562" width="125" height="60"/>
-                                <color key="backgroundColor" red="0.41960784313725491" green="0.55294117647058827" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="Ght-hB-aBO"/>
                                     <constraint firstAttribute="height" constant="60" id="Zic-6J-zK1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="26"/>
+                                <color key="tintColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="CANCEL">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -243,12 +244,13 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7m-4l-Ba5">
                                 <rect key="frame" x="230" y="562" width="125" height="60"/>
-                                <color key="backgroundColor" red="0.41960784313725491" green="0.55294117647058827" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="YlH-8E-yVQ"/>
                                     <constraint firstAttribute="height" constant="60" id="kKp-Ig-lox"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="26"/>
+                                <color key="tintColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -257,6 +259,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="okButton:" destination="0cv-aV-VLe" eventType="touchUpInside" id="13A-F6-t7O"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-mx-MoT">
                                 <rect key="frame" x="113.5" y="358" width="241.5" height="28"/>
@@ -265,6 +270,9 @@
                                     <segment title="Female"/>
                                 </segments>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="genderSegmentedController:" destination="0cv-aV-VLe" eventType="valueChanged" id="zhp-1S-xa9"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.96638375520706177" green="0.9808003306388855" blue="0.99875205755233765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -319,7 +327,12 @@
                     <connections>
                         <outlet property="cancelButton" destination="ot3-90-NyL" id="4bu-mK-5c2"/>
                         <outlet property="okButton" destination="A7m-4l-Ba5" id="gEM-Yl-o7J"/>
+                        <outlet property="userBirthdayTextField" destination="Wk2-1W-Wze" id="xMS-D9-f93"/>
+                        <outlet property="userGenderSegmentedController" destination="yWv-mx-MoT" id="sw9-hh-ut0"/>
+                        <outlet property="userHeightTextField" destination="b9w-7Y-q5c" id="AEN-b2-ZQ2"/>
                         <outlet property="userImageView" destination="VNA-1M-Xhb" id="mYI-0A-Ytb"/>
+                        <outlet property="userNameTextField" destination="UbO-57-wM6" id="VIB-kC-Y0E"/>
+                        <outlet property="userWeightTextField" destination="5Zq-2U-clx" id="Rrp-Ex-73L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abc-Zq-f5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
