@@ -13,7 +13,8 @@ class UsersDataController: UIViewController {
     
     var ref : DatabaseReference?
     var facebookID : String = ""
-    var gender : String?
+    var googleID : String = ""
+    var gender : String = "Male"
     
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -29,17 +30,53 @@ class UsersDataController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        //Facebook userPicture automatically load 大頭貼自動代入
-        self.userImageView.load(url: URL(string: "https://graph.facebook.com/\(facebookID)/picture?height=480&width=480")!)
+        // userPicture automatically load 使用者名稱自動代入
+        if facebookID != "" {
+            facebookUserPicture()
+        }else{
+             googleUserPicture()
+        }
         
-        //Facebook userName automatically load 使用者名稱自動代入
+        
+        // userName automatically load 使用者名稱自動代入
+        if facebookID != "" {
+            facebookUserName()
+        }else{
+            googleUserName()
+        }
+        
+    }
+    
+    //Facebook userPicture automatically load 大頭貼自動代入
+    fileprivate func facebookUserPicture() {
+        self.userImageView.load(url: URL(string: "https://graph.facebook.com/\(facebookID)/picture?height=480&width=480")!)
+    }
+    
+    //google userPicture automatically load 大頭貼自動代入
+    fileprivate func googleUserPicture(){
+        
+        self.ref?.child("Users/\(googleID)/picture").observeSingleEvent(of: .value, with: { (snapshot) in
+            let googleUserPicture = snapshot.value as? String
+            self.userImageView.load(url: URL(string: googleUserPicture!)!)
+        })
+    }
+    
+    //Facebook userName automatically load 使用者名稱自動代入
+    fileprivate func facebookUserName(){
         ref?.child("Users/\(facebookID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
-            let name = snapshot.value as! String
+            let name = snapshot.value as? String
             self.userNameTextField.text = name
             self.userNameTextField.isEnabled = false
         })
-        
-        
+    }
+    
+    //google userName automatically load 使用者名稱自動代入
+    fileprivate func googleUserName(){
+        ref?.child("Users/\(googleID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
+            let name = snapshot.value as? String
+            self.userNameTextField.text = name
+            self.userNameTextField.isEnabled = false
+        })
     }
     
     // keyboard end to exit
@@ -65,8 +102,13 @@ class UsersDataController: UIViewController {
     
     //Update User's Data to Firebase ( Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
-        let values = ["birthday" : userBirthdayTextField.text , "height" : userHeightTextField.text , "weight" : userWeightTextField.text , "gender" : gender]
-        ref?.child("Users/\(facebookID)").updateChildValues(values as [AnyHashable : Any])
+        let values = ["birthday" : userBirthdayTextField.text , "height" : userHeightTextField.text , "weight" : userWeightTextField.text , "gender" : gender] as [AnyHashable : Any]
+        if facebookID != "" {
+            ref?.child("Users/\(facebookID)").updateChildValues(values)
+        }else{
+            ref?.child("Users/\(googleID)").updateChildValues(values)
+        }
+        
     }
     
     // Back to Login View controller

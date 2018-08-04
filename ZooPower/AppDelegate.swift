@@ -53,9 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
             guard let uid = user?.uid else { return }
             guard let name = user?.displayName else { return }
             guard let email = user?.email else { return }
-            let values = ["email" : email , "name" : name  ]
+            guard let picture = user?.photoURL else { return }
+            let values = ["email" : email , "name" : name ,"picture" : picture.absoluteString] as [String : Any]
             self.ref = Database.database().reference()
-            self.ref?.child("Users").child(uid).setValue(values)
+            self.ref?.child("Users").child(uid).updateChildValues(values)
+            
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
+            usersDataController?.googleID = uid
+            self.window?.rootViewController?.present(usersDataController!, animated: true, completion: nil)
         })
         
     }
