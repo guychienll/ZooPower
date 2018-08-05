@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class UsersDataController: UIViewController {
+class UsersDataController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     var ref : DatabaseReference?
     var facebookID : String = ""
@@ -34,7 +34,7 @@ class UsersDataController: UIViewController {
         if facebookID != "" {
             facebookUserPicture()
         }else{
-             googleUserPicture()
+            googleUserPicture()
         }
         
         
@@ -99,6 +99,31 @@ class UsersDataController: UIViewController {
             gender = "Female"
         }
     }
+    
+    //使用者自行更換照片（尚未完成）
+    
+    @IBAction func editPhotoButton(_ sender: Any) {
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        picker.sourceType = .photoLibrary
+//        present(picker, animated: true, completion: nil)
+    }
+   
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        if let image = info[.originalImage] as? UIImage {
+//            userImageView.image = image
+//        }else{
+//            print("Wrong")
+//        }
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        print("canceled picker")
+//        dismiss(animated: true, completion: nil)
+//    }
+    
     
     //Update User's Data to Firebase ( Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
