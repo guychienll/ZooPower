@@ -12,9 +12,9 @@ class ZooController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        // Do any additional setup after loading the view.
     }
     //動物園地區頁面導向
     @IBAction func oceanZoneButton(_ sender: Any) {
@@ -39,15 +39,5 @@ class ZooController: UIViewController {
         zooMainController?.cellFlag = 3
         self.show(zooMainController!, sender: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

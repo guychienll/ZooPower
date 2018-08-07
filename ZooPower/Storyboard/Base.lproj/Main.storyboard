@@ -420,7 +420,7 @@
         <scene sceneID="TBW-L3-19A">
             <objects>
                 <collectionViewController storyboardIdentifier="ZooMainController" id="8PW-fb-f5k" customClass="ZooMainController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="gpj-hq-nZI">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="gpj-hq-nZI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.93725490196078431" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -429,6 +429,9 @@
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Mt1-R5-ZAr" customClass="ZooMainCell" customModule="ZooPower" customModuleProvider="target">
@@ -475,6 +478,9 @@
                                                     <integer key="value" value="15"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="areaButton:" destination="8PW-fb-f5k" eventType="touchUpInside" id="Q8O-Qb-Qhu"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -490,10 +496,179 @@
                             <outlet property="delegate" destination="8PW-fb-f5k" id="cRj-6r-hh0"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <outlet property="zooMainCollectionViewFlowLayout" destination="rbH-u0-JTd" id="iyB-tl-xvC"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0zM-Ov-RTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4303" y="-1298"/>
+            <point key="canvasLocation" x="4277.6000000000004" y="-1299.400299850075"/>
+        </scene>
+        <!--Zoo Collection Controller-->
+        <scene sceneID="88Q-xs-TcM">
+            <objects>
+                <viewController storyboardIdentifier="ZooCollectionController" id="pee-kY-qTH" customClass="ZooCollectionController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e4u-GB-FD4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="zdT-7O-09S">
+                                <rect key="frame" x="40" y="137" width="295" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHX-Ht-VgW">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="35"/>
+                                        <color key="backgroundColor" red="0.61960784313725492" green="0.72941176470588232" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="2R9-pi-Dze"/>
+                                            <constraint firstAttribute="width" constant="55" id="7BU-z0-yhs"/>
+                                        </constraints>
+                                        <state key="normal" title="海洋">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tab1:" destination="pee-kY-qTH" eventType="touchUpInside" id="21R-jR-5fZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RP-Bi-T2o">
+                                        <rect key="frame" x="80" y="0.0" width="55" height="35"/>
+                                        <color key="backgroundColor" red="0.60784313725490191" green="0.87058823529411766" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="YPu-DF-eXE"/>
+                                            <constraint firstAttribute="width" constant="55" id="rOg-qf-qVi"/>
+                                        </constraints>
+                                        <state key="normal" title="草原">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tab2:" destination="pee-kY-qTH" eventType="touchUpInside" id="FZI-bn-fu7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjj-Nw-loO">
+                                        <rect key="frame" x="160" y="0.0" width="55" height="35"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.73333333333333328" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="BGM-wT-J6l"/>
+                                            <constraint firstAttribute="width" constant="55" id="TtZ-9W-E3m"/>
+                                        </constraints>
+                                        <state key="normal" title="雨林">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tab3:" destination="pee-kY-qTH" eventType="touchUpInside" id="psT-AB-t1n"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebl-Ft-HYa">
+                                        <rect key="frame" x="240" y="0.0" width="55" height="35"/>
+                                        <color key="backgroundColor" red="0.78823529411764703" green="0.51764705882352935" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="7A6-uV-Pfp"/>
+                                            <constraint firstAttribute="width" constant="55" id="cZy-MW-IMw"/>
+                                        </constraints>
+                                        <state key="normal" title="特區">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tab4:" destination="pee-kY-qTH" eventType="touchUpInside" id="JEN-QR-NvE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q5a-NV-1B8">
+                                <rect key="frame" x="40" y="167" width="295" height="417"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.70588235294117641" green="0.8656417112" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G1i-Qu-HqH">
+                                    <size key="itemSize" width="80" height="125"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="15" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Cell" id="f2x-Ko-YyG" customClass="ZooCollectionCell" customModule="ZooPower" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="15" width="80" height="125"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="125"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmo-1t-Evj">
+                                                    <rect key="frame" x="19" y="91" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="uJc-Za-z9p"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-fN-WzJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="VuF-bk-hx4"/>
+                                                        <constraint firstAttribute="width" constant="80" id="qxg-gv-ScA"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="bmo-1t-Evj" secondAttribute="bottom" constant="6" id="GHS-30-XY4"/>
+                                            <constraint firstItem="bmo-1t-Evj" firstAttribute="centerX" secondItem="f2x-Ko-YyG" secondAttribute="centerX" id="Jn3-zj-hNh"/>
+                                            <constraint firstItem="GKM-fN-WzJ" firstAttribute="top" secondItem="f2x-Ko-YyG" secondAttribute="top" id="NnH-DH-rJd"/>
+                                            <constraint firstItem="bmo-1t-Evj" firstAttribute="top" secondItem="GKM-fN-WzJ" secondAttribute="bottom" constant="11" id="ixD-Mr-WEM"/>
+                                            <constraint firstAttribute="trailing" secondItem="GKM-fN-WzJ" secondAttribute="trailing" id="lgz-WO-sxE"/>
+                                            <constraint firstItem="GKM-fN-WzJ" firstAttribute="leading" secondItem="f2x-Ko-YyG" secondAttribute="leading" id="qUC-Hk-DjM"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="animalImage" destination="GKM-fN-WzJ" id="8ry-6e-Ibw"/>
+                                            <outlet property="animalNameLabel" destination="bmo-1t-Evj" id="jdV-tY-PS4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="pee-kY-qTH" id="tVL-KC-3R7"/>
+                                    <outlet property="delegate" destination="pee-kY-qTH" id="pb4-bi-gMa"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COLLECTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RS-vP-85D">
+                                <rect key="frame" x="91" y="69" width="192" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705882352937" green="0.92549019607843142" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="kpa-9V-jqK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="07w-80-adD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5060" y="-1297"/>
         </scene>
         <!--Chat-->
         <scene sceneID="lXJ-d8-J3t">
