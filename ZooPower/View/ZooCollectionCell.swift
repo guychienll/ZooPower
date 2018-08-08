@@ -14,8 +14,9 @@ class ZooCollectionCell: UICollectionViewCell {
         didSet{
             animalImage.layer.borderWidth = 1
             animalImage.layer.borderColor = UIColor.white.cgColor
-            animalImage.isUserInteractionEnabled = true
+        
         }
     }
     @IBOutlet weak var animalNameLabel: UILabel!
+    
 }

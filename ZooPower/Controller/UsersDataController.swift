@@ -26,10 +26,13 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     @IBOutlet weak var userWeightTextField: UITextField!
     
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
         
+        ref = Database.database().reference()
         // userPicture automatically load 使用者名稱自動代入
         if facebookID != "" {
             facebookUserPicture()
@@ -45,6 +48,14 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
             googleUserName()
         }
         
+        //觀察popup動靜
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePopupClosing), name: .saveDateTime, object: nil)
+    }
+    
+    //設定日期為picker挑選的日期
+    @objc func handlePopupClosing(notification : Notification) {
+        let dateVc = notification.object as! DatePopupController
+        userBirthdayTextField.text = dateVc.formattedDate
     }
     
     //Facebook userPicture automatically load 大頭貼自動代入
@@ -100,9 +111,11 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         }
     }
     
+    
     //使用者自行更換照片（尚未完成）
     
     @IBAction func editPhotoButton(_ sender: Any) {
+        
 //        let picker = UIImagePickerController()
 //        picker.delegate = self
 //        picker.sourceType = .photoLibrary
@@ -127,7 +140,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     
     //Update User's Data to Firebase ( Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
-        let values = ["birthday" : userBirthdayTextField.text , "height" : userHeightTextField.text , "weight" : userWeightTextField.text , "gender" : gender] as [AnyHashable : Any]
+        let values = ["birthday" : userBirthdayTextField.text ?? "" , "height" : userHeightTextField.text ?? "" , "weight" : userWeightTextField.text ?? "" , "gender" : gender] as [AnyHashable : Any]
         if facebookID != "" {
             ref?.child("Users/\(facebookID)").updateChildValues(values)
         }else{

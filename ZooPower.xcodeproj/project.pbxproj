@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		041461DC2113F10800FDA0E1 /* UsersDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041461DB2113F10800FDA0E1 /* UsersDataController.swift */; };
 		091F28828B2450BB672DAD73 /* Pods_ZooPower.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */; };
+		1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F083811211A6FC4007D0CDD /* DatePopupController.swift */; };
+		1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */; };
 		1F266C8F2115A10B00B04C58 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F266C8E2115A10B00B04C58 /* Animal.swift */; };
+		1F32009421198F1300D84592 /* ZooCollectionPopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32009321198F1300D84592 /* ZooCollectionPopController.swift */; };
 		1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F730399210D4E610014BE1D /* AppDelegate.swift */; };
 		1F73039F210D4E610014BE1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F73039D210D4E610014BE1D /* Main.storyboard */; };
 		1F7303A1210D4E620014BE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7303A0210D4E620014BE1D /* Assets.xcassets */; };
@@ -26,7 +29,10 @@
 
 /* Begin PBXFileReference section */
 		041461DB2113F10800FDA0E1 /* UsersDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDataController.swift; sourceTree = "<group>"; };
+		1F083811211A6FC4007D0CDD /* DatePopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePopupController.swift; sourceTree = "<group>"; };
+		1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtention.swift; sourceTree = "<group>"; };
 		1F266C8E2115A10B00B04C58 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		1F32009321198F1300D84592 /* ZooCollectionPopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooCollectionPopController.swift; sourceTree = "<group>"; };
 		1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooPower.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F730396210D4E610014BE1D /* ZooPower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooPower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F730399210D4E610014BE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */,
+				1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -125,6 +132,8 @@
 				1F999E3E2116199000C9A1C0 /* ZooController.swift */,
 				1FDAA8CB211683930040A204 /* ZooMainController.swift */,
 				1F92CE132118384900BCB937 /* ZooCollectionController.swift */,
+				1F32009321198F1300D84592 /* ZooCollectionPopController.swift */,
+				1F083811211A6FC4007D0CDD /* DatePopupController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -305,6 +314,8 @@
 			files = (
 				1FDAA8CC211683930040A204 /* ZooMainController.swift in Sources */,
 				1FDAA8D021168A850040A204 /* ZooMainCell.swift in Sources */,
+				1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */,
+				1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */,
 				041461DC2113F10800FDA0E1 /* UsersDataController.swift in Sources */,
 				1FF899572114C20300E6CD11 /* UIImageViewExtention.swift in Sources */,
 				1F92CE162118390A00BCB937 /* ZooCollectionCell.swift in Sources */,
@@ -313,6 +324,7 @@
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 				1F999E3F2116199000C9A1C0 /* ZooController.swift in Sources */,
 				1F266C8F2115A10B00B04C58 /* Animal.swift in Sources */,
+				1F32009421198F1300D84592 /* ZooCollectionPopController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
