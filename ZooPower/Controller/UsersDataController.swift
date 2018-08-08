@@ -12,6 +12,7 @@ import Firebase
 class UsersDataController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     var ref : DatabaseReference?
+    var storageRef : StorageReference?
     var facebookID : String = ""
     var googleID : String = ""
     var gender : String = "Male"
@@ -31,8 +32,9 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let imageName = UUID().uuidString
         ref = Database.database().reference()
+        storageRef = Storage.storage().reference().child("\(imageName).png")
         // userPicture automatically load 使用者名稱自動代入
         if facebookID != "" {
             facebookUserPicture()
@@ -111,40 +113,88 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         }
     }
     
-    
-    //使用者自行更換照片（尚未完成）
-    
+    //使用者自行更換照片
     @IBAction func editPhotoButton(_ sender: Any) {
         
-//        let picker = UIImagePickerController()
-//        picker.delegate = self
-//        picker.sourceType = .photoLibrary
-//        present(picker, animated: true, completion: nil)
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+       picker.sourceType = .photoLibrary
+      present(picker, animated: true, completion: nil)
     }
    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//
-//        if let image = info[.originalImage] as? UIImage {
-//            userImageView.image = image
-//        }else{
-//            print("Wrong")
-//        }
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        print("canceled picker")
-//        dismiss(animated: true, completion: nil)
-//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        var selectedImageFromPicker : UIImage?
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            print(editedImage.size)
+            selectedImageFromPicker = editedImage
+        }else if let originalImage = info[.originalImage] as? UIImage {
+            print(originalImage.size)
+             selectedImageFromPicker = originalImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            self.userImageView.image = selectedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     
-    //Update User's Data to Firebase ( Birthday , Height , Weight , Gender )
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("canceled picker")
+       dismiss(animated: true, completion: nil)
+    
+}
+    
+    //Update User's Data to Firebase ( PictureURL , Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
-        let values = ["birthday" : userBirthdayTextField.text ?? "" , "height" : userHeightTextField.text ?? "" , "weight" : userWeightTextField.text ?? "" , "gender" : gender] as [AnyHashable : Any]
         if facebookID != "" {
-            ref?.child("Users/\(facebookID)").updateChildValues(values)
+            let uploadData = self.userImageView.image?.pngData()
+            //upload image to firebase storage
+            storageRef?.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
+                if error != nil{
+                    print(error ?? "")
+                    return
+                }
+                
+                self.storageRef?.downloadURL(completion: { (url, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    if let profileImageUrl = url?.absoluteString {
+                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text ?? "" , "height" : self.userHeightTextField.text ?? "" , "weight" : self.userWeightTextField.text ?? "" , "gender" : self.gender] as [AnyHashable : Any]
+                        self.ref?.child("Users/\(self.facebookID)").updateChildValues(values)
+                    }
+                })
+                
+                print(metadata ?? "")
+            })
+           
         }else{
-            ref?.child("Users/\(googleID)").updateChildValues(values)
+            let uploadData = self.userImageView.image?.pngData()
+            //upload image to firebase storage
+            storageRef?.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
+                if error != nil{
+                    print(error ?? "")
+                    return
+                }
+                self.storageRef?.downloadURL(completion: { (url, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    if let profileImageUrl = url?.absoluteString {
+                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text ?? "" , "height" : self.userHeightTextField.text ?? "" , "weight" : self.userWeightTextField.text ?? "" , "gender" : self.gender] as [AnyHashable : Any]
+                        self.ref?.child("Users/\(self.googleID)").updateChildValues(values)
+                    }
+                })
+                print(metadata ?? "")
+            })
         }
         
     }

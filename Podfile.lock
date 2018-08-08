@@ -71,6 +71,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -81,6 +82,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - SwiftGifOrigin (~> 1.6.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -101,6 +103,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -120,7 +123,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: a40608a4c9aea44d7ba43bf8477b8af7daeb3d21
+PODFILE CHECKSUM: 21a6491fd032148ed64abfad8009cd8a8be2900a
 
 COCOAPODS: 1.5.3
