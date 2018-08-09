@@ -34,7 +34,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         super.viewDidLoad()
         let imageName = UUID().uuidString
         ref = Database.database().reference()
-        storageRef = Storage.storage().reference().child("\(imageName).png")
+        storageRef = Storage.storage().reference().child("/userProfileImage/\(imageName).png")
         // userPicture automatically load 使用者名稱自動代入
         if facebookID != "" {
             facebookUserPicture()
@@ -79,7 +79,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         ref?.child("Users/\(facebookID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
             let name = snapshot.value as? String
             self.userNameTextField.text = name
-            self.userNameTextField.isEnabled = false
+            //self.userNameTextField.isEnabled = false
         })
     }
     
@@ -88,7 +88,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         ref?.child("Users/\(googleID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
             let name = snapshot.value as? String
             self.userNameTextField.text = name
-            self.userNameTextField.isEnabled = false
+            //self.userNameTextField.isEnabled = false
         })
     }
     
@@ -119,10 +119,10 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-       picker.sourceType = .photoLibrary
-      present(picker, animated: true, completion: nil)
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
-   
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         
@@ -133,7 +133,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
             selectedImageFromPicker = editedImage
         }else if let originalImage = info[.originalImage] as? UIImage {
             print(originalImage.size)
-             selectedImageFromPicker = originalImage
+            selectedImageFromPicker = originalImage
         }
         
         if let selectedImage = selectedImageFromPicker {
@@ -146,9 +146,9 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("canceled picker")
-       dismiss(animated: true, completion: nil)
-    
-}
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     //Update User's Data to Firebase ( PictureURL , Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
@@ -172,9 +172,9 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
                     }
                 })
                 
-                print(metadata ?? "")
+                
             })
-           
+            
         }else{
             let uploadData = self.userImageView.image?.pngData()
             //upload image to firebase storage
@@ -193,7 +193,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
                         self.ref?.child("Users/\(self.googleID)").updateChildValues(values)
                     }
                 })
-                print(metadata ?? "")
+                
             })
         }
         
