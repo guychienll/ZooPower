@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
-class UsersDataController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+class UsersDataController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate ,UITextFieldDelegate{
     
     var ref : DatabaseReference?
     var storageRef : StorageReference?
@@ -17,18 +18,52 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     var googleID : String = ""
     var gender : String = "Male"
     
+    @IBOutlet weak var userDataScrollView: UIScrollView!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!{
+        didSet{
+            userNameTextField.tag = 1
+            userNameTextField.delegate = self
+        }
+    }
     @IBOutlet weak var userGenderSegmentedController: UISegmentedControl!
     @IBOutlet weak var userBirthdayTextField: UITextField!
-    @IBOutlet weak var userHeightTextField: UITextField!
-    @IBOutlet weak var userWeightTextField: UITextField!
+    @IBOutlet weak var userHeightTextField: UITextField!{
+        didSet{
+            userHeightTextField.keyboardType = .numbersAndPunctuation
+            userHeightTextField.tag = 2
+            userHeightTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var userWeightTextField: UITextField!{
+        didSet{
+            userWeightTextField.keyboardType = .numbersAndPunctuation
+            userWeightTextField.tag = 3
+            userWeightTextField.delegate = self
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //鍵盤跳出 元件閃避上移
+        userDataScrollView.setContentOffset(CGPoint(x: 0, y: 145), animated: true)
+    }
     
     
-    
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //textField間 互相換行
+        if let nextTextField = view.viewWithTag(textField.tag + 1){
+            textField.resignFirstResponder()
+            nextTextField.becomeFirstResponder()
+        }
+        textField.resignFirstResponder()
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //鍵盤收起 所有元件回到原位
+        userDataScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +87,8 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         
         //觀察popup動靜
         NotificationCenter.default.addObserver(self, selector: #selector(handlePopupClosing), name: .saveDateTime, object: nil)
+        
+       
     }
     
     //設定日期為picker挑選的日期
@@ -92,18 +129,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         })
     }
     
-    // keyboard end to exit
-    @IBAction func nameTextField(_ sender: Any) {
-    }
-    // keyboard end to exit
-    @IBAction func birthdayTextField(_ sender: Any) {
-    }
-    // keyboard end to exit
-    @IBAction func heightTextField(_ sender: Any) {
-    }
-    // keyboard end to exit
-    @IBAction func weightTextField(_ sender: Any) {
-    }
+    
     // gerderController
     @IBAction func genderSegmentedController(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
