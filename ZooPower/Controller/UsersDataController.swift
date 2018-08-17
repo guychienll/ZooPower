@@ -231,12 +231,18 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func selectDateButton(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let DatePopupController = sb.instantiateViewController(withIdentifier: "DatePopupController") as? DatePopupController
+        self.present(DatePopupController!, animated: true, completion: nil)
+    }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! TabBarController
+        destination.facebookID = facebookID
+        destination.googleID = googleID
+    }
     
     
 }

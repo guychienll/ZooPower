@@ -9,18 +9,21 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
+
 
 class NewRunController: UIViewController , MKMapViewDelegate{
 
     private var run: Run?
-    
+    var ref : DatabaseReference?
     private let locationManager = LocationManager.shared
     private var seconds = 0
     private var timer: Timer?
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var locationList: [CLLocation] = []
     var demoLocationManager : CLLocationManager!
-    
+    var facebookID : String?
+    var googleID : String?
     @IBOutlet weak var demoMapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -31,6 +34,19 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let getID = tabBarController as? TabBarController
+        if getID?.facebookID != "" {
+              facebookID = getID?.facebookID
+            print(facebookID!)
+        }else{
+             googleID = getID?.googleID
+            print(googleID!)
+
+        }
+ 
+        
+        
+       
        
         
         //隱藏navigationbar（透明化）
@@ -142,6 +158,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         CoreDataStack.saveContext()
         
         run = newRun
+        ref = Database.database().reference()
+        ref?.child("/Users/\(self.facebookID)/")
         print(run ?? "default value")
     }
     

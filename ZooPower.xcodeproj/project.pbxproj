@@ -13,6 +13,7 @@
 		1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */; };
 		1F0B0414211AC95E00E95DA7 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B0413211AC95E00E95DA7 /* Swift+Gif.swift */; };
 		1F266C8F2115A10B00B04C58 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F266C8E2115A10B00B04C58 /* Animal.swift */; };
+		1F2FF0FF2125E3210066F60A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2FF0FE2125E3210066F60A /* TabBarController.swift */; };
 		1F32009421198F1300D84592 /* ZooCollectionPopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32009321198F1300D84592 /* ZooCollectionPopController.swift */; };
 		1F3237FD2121E5F200412A0F /* NewRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3237FC2121E5F200412A0F /* NewRunController.swift */; };
 		1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F730399210D4E610014BE1D /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtention.swift; sourceTree = "<group>"; };
 		1F0B0413211AC95E00E95DA7 /* Swift+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
 		1F266C8E2115A10B00B04C58 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		1F2FF0FE2125E3210066F60A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1F32009321198F1300D84592 /* ZooCollectionPopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooCollectionPopController.swift; sourceTree = "<group>"; };
 		1F3237FC2121E5F200412A0F /* NewRunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunController.swift; sourceTree = "<group>"; };
 		1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooPower.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				1F083811211A6FC4007D0CDD /* DatePopupController.swift */,
 				1F3237FC2121E5F200412A0F /* NewRunController.swift */,
 				1FBCE19A212424820030764C /* RunDetailsController.swift */,
+				1F2FF0FE2125E3210066F60A /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */,
 				1FBCE194212422900030764C /* CoreDataStack.swift in Sources */,
 				1FBCE197212422DF0030764C /* ZooPower.xcdatamodeld in Sources */,
+				1F2FF0FF2125E3210066F60A /* TabBarController.swift in Sources */,
 				1FBCE19D2124268F0030764C /* MulticolorPolyline.swift in Sources */,
 				1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */,
 				1F3237FD2121E5F200412A0F /* NewRunController.swift in Sources */,
