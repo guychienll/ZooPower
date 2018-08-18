@@ -15,6 +15,7 @@ class ZooController: UIViewController {
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
     }
     //動物園地區頁面導向
     @IBAction func oceanZoneButton(_ sender: Any) {

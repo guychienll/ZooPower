@@ -18,6 +18,13 @@ import GoogleSignIn
 class LoginController: UIViewController , GIDSignInUIDelegate {
     
     var ref : DatabaseReference?
+    var currentID : String?
+    var data : NSDictionary?
+    var id : Any?
+    var name : Any?
+    var email : Any?
+    var picture : Any?
+    var values : [String : Any]?
     
     @IBOutlet weak var facebookLoginButton: UIButton!{
         didSet{
@@ -32,7 +39,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     func showEmailAddress(){
@@ -47,8 +54,15 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
                 print("Something went wrong with our FB user: ", error ?? "")
                 return
             }
-            
             print("Successfully logged in with our user: ", user ?? "")
+            self.currentID = Auth.auth().currentUser?.uid
+            self.ref = Database.database().reference()
+            self.ref?.child("Users").child(self.currentID!).updateChildValues(self.values as! [AnyHashable : Any])
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
+            usersDataController?.facebookID = self.id as! String
+            self.present(usersDataController!, animated: true, completion: nil)
+            
         })
         
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email , picture"]).start { (connection, result, err) in
@@ -59,15 +73,13 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             }
             
             //get user data to firebase
-            let data = result as! NSDictionary
-            let id = data["id"] , email = data["email"] , name = data["name"] , picture = data["picture"]
-            let values = ["email" : email , "name" : name , "picture" : picture ]
-            self.ref = Database.database().reference()
-            self.ref?.child("Users").child(id as! String).updateChildValues(values as [AnyHashable : Any])
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
-            usersDataController?.facebookID = id as! String
-            self.present(usersDataController!, animated: true, completion: nil)
+            self.data = result as? NSDictionary
+            self.id = self.data!["id"]
+            self.email = self.data!["email"]
+            self.name = self.data!["name"]
+            self.picture = self.data!["picture"]
+            self.values = ["email" : self.email , "name" : self.name , "picture" : self.picture ]
+            
         }
     }
     
@@ -81,11 +93,15 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
                 return
             }
             self.showEmailAddress()
+            UserDefaults.standard.set(1, forKey: "checkLogIn")
+            UserDefaults.standard.synchronize()
         }
     }
     
     @IBAction func googleLoginButton(_ sender: Any) {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance()?.signIn()
+        UserDefaults.standard.set(1, forKey: "checkLogIn")
+        UserDefaults.standard.synchronize()
     }
 }

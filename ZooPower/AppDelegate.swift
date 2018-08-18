@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
     
     var window: UIWindow?
     var ref : DatabaseReference?
+    var check = UserDefaults.standard.integer(forKey: "checkLogIn")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -28,6 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         // Override point for customization after application launch.
+        
+        // 判斷是否登入，分別帶入不同畫面
+        if check != 1 {
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginController") as? LoginController
+            self.window?.rootViewController = controller
+        } else {
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")as? TabBarController
+            self.window?.rootViewController = controller
+        }
+        
         return true
     }
     

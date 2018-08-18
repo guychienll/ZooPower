@@ -12,10 +12,10 @@
 		1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F083811211A6FC4007D0CDD /* DatePopupController.swift */; };
 		1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */; };
 		1F0B0414211AC95E00E95DA7 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B0413211AC95E00E95DA7 /* Swift+Gif.swift */; };
-		1F266C8F2115A10B00B04C58 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F266C8E2115A10B00B04C58 /* Animal.swift */; };
 		1F2FF0FF2125E3210066F60A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2FF0FE2125E3210066F60A /* TabBarController.swift */; };
 		1F32009421198F1300D84592 /* ZooCollectionPopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32009321198F1300D84592 /* ZooCollectionPopController.swift */; };
 		1F3237FD2121E5F200412A0F /* NewRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3237FC2121E5F200412A0F /* NewRunController.swift */; };
+		1F62E2712128141A00D520A8 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62E2702128141A00D520A8 /* SettingController.swift */; };
 		1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F730399210D4E610014BE1D /* AppDelegate.swift */; };
 		1F73039F210D4E610014BE1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F73039D210D4E610014BE1D /* Main.storyboard */; };
 		1F7303A1210D4E620014BE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7303A0210D4E620014BE1D /* Assets.xcassets */; };
@@ -42,11 +42,11 @@
 		1F083811211A6FC4007D0CDD /* DatePopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePopupController.swift; sourceTree = "<group>"; };
 		1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtention.swift; sourceTree = "<group>"; };
 		1F0B0413211AC95E00E95DA7 /* Swift+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
-		1F266C8E2115A10B00B04C58 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		1F2FF0FE2125E3210066F60A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1F32009321198F1300D84592 /* ZooCollectionPopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooCollectionPopController.swift; sourceTree = "<group>"; };
 		1F3237FC2121E5F200412A0F /* NewRunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunController.swift; sourceTree = "<group>"; };
 		1F5609991C34A8FDADD38278 /* Pods_ZooPower.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooPower.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F62E2702128141A00D520A8 /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		1F730396210D4E610014BE1D /* ZooPower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooPower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F730399210D4E610014BE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F73039E210D4E610014BE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,7 +87,6 @@
 		1F266C8B2115A04D00B04C58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1F266C8E2115A10B00B04C58 /* Animal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +163,7 @@
 				1F3237FC2121E5F200412A0F /* NewRunController.swift */,
 				1FBCE19A212424820030764C /* RunDetailsController.swift */,
 				1F2FF0FE2125E3210066F60A /* TabBarController.swift */,
+				1F62E2702128141A00D520A8 /* SettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -352,6 +352,7 @@
 				1FDAA8CC211683930040A204 /* ZooMainController.swift in Sources */,
 				1FDAA8D021168A850040A204 /* ZooMainCell.swift in Sources */,
 				1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */,
+				1F62E2712128141A00D520A8 /* SettingController.swift in Sources */,
 				1FBCE194212422900030764C /* CoreDataStack.swift in Sources */,
 				1FBCE197212422DF0030764C /* ZooPower.xcdatamodeld in Sources */,
 				1F2FF0FF2125E3210066F60A /* TabBarController.swift in Sources */,
@@ -370,7 +371,6 @@
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 				1F999E3F2116199000C9A1C0 /* ZooController.swift in Sources */,
 				1FBCE1902124221A0030764C /* FormatDisplay.swift in Sources */,
-				1F266C8F2115A10B00B04C58 /* Animal.swift in Sources */,
 				1F32009421198F1300D84592 /* ZooCollectionPopController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

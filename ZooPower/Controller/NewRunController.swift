@@ -22,8 +22,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var locationList: [CLLocation] = []
     var demoLocationManager : CLLocationManager!
-    var facebookID : String?
-    var googleID : String?
+    var currentID = Auth.auth().currentUser?.uid
     @IBOutlet weak var demoMapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -33,21 +32,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let getID = tabBarController as? TabBarController
-        if getID?.facebookID != "" {
-              facebookID = getID?.facebookID
-            print(facebookID!)
-        }else{
-             googleID = getID?.googleID
-            print(googleID!)
-
-        }
  
-        
-        
-       
-       
         
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -159,7 +144,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         
         run = newRun
         ref = Database.database().reference()
-        ref?.child("/Users/\(self.facebookID)/")
+        print(self.currentID!)
+        //ref?.child("/Users/\(self.currentID!)/")
         print(run ?? "default value")
     }
     

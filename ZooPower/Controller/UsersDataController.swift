@@ -16,6 +16,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     var storageRef : StorageReference?
     var facebookID : String = ""
     var googleID : String = ""
+    var currentID = Auth.auth().currentUser?.uid
     var gender : String = "Male"
     
     @IBOutlet weak var userDataScrollView: UIScrollView!
@@ -72,21 +73,16 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         let imageName = UUID().uuidString
         ref = Database.database().reference()
         storageRef = Storage.storage().reference().child("/userProfileImage/\(imageName).png")
-        // userPicture automatically load 使用者名稱自動代入
+        // userPicture automatically load 使用者圖片自動代入
         if facebookID != "" {
             facebookUserPicture()
         }else{
             googleUserPicture()
         }
         
-        
+      
         // userName automatically load 使用者名稱自動代入
-        if facebookID != "" {
-            facebookUserName()
-        }else{
-            googleUserName()
-        }
-        
+            automaticallyLoadUserName()
         //觀察popup動靜
         NotificationCenter.default.addObserver(self, selector: #selector(handlePopupClosing), name: .saveDateTime, object: nil)
         
@@ -113,18 +109,9 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
         })
     }
     
-    //Facebook userName automatically load 使用者名稱自動代入
-    fileprivate func facebookUserName(){
-        ref?.child("Users/\(facebookID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
-            let name = snapshot.value as? String
-            self.userNameTextField.text = name
-            //self.userNameTextField.isEnabled = false
-        })
-    }
-    
-    //google userName automatically load 使用者名稱自動代入
-    fileprivate func googleUserName(){
-        ref?.child("Users/\(googleID)/name").observeSingleEvent(of: .value, with: { (snapshot) in
+    //UserName Automatically load 使用者名稱自動代入
+    fileprivate func automaticallyLoadUserName(){
+        ref?.child("Users/\(self.currentID!)/name").observeSingleEvent(of: .value, with: { (snapshot) in
             let name = snapshot.value as? String
             self.userNameTextField.text = name
             //self.userNameTextField.isEnabled = false
@@ -180,7 +167,6 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     
     //Update User's Data to Firebase ( PictureURL , Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
-        if facebookID != "" {
             let uploadData = self.userImageView.image?.pngData()
             //upload image to firebase storage
             storageRef?.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
@@ -196,35 +182,12 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
                     }
                     if let profileImageUrl = url?.absoluteString {
                         let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text ?? "" , "height" : self.userHeightTextField.text ?? "" , "weight" : self.userWeightTextField.text ?? "" , "gender" : self.gender] as [AnyHashable : Any]
-                        self.ref?.child("Users/\(self.facebookID)").updateChildValues(values)
+                        self.ref?.child("Users/\(self.currentID!)").updateChildValues(values)
                     }
                 })
                 
                 
             })
-            
-        }else{
-            let uploadData = self.userImageView.image?.pngData()
-            //upload image to firebase storage
-            storageRef?.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
-                if error != nil{
-                    print(error ?? "")
-                    return
-                }
-                self.storageRef?.downloadURL(completion: { (url, error) in
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-                    if let profileImageUrl = url?.absoluteString {
-                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text ?? "" , "height" : self.userHeightTextField.text ?? "" , "weight" : self.userWeightTextField.text ?? "" , "gender" : self.gender] as [AnyHashable : Any]
-                        self.ref?.child("Users/\(self.googleID)").updateChildValues(values)
-                    }
-                })
-                
-            })
-        }
-        
     }
     
     // Back to Login View controller

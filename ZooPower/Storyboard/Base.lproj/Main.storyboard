@@ -13,7 +13,8 @@
         <!--Login Controller-->
         <scene sceneID="ecS-QS-jJe">
             <objects>
-                <viewController id="nhK-m0-5CU" customClass="LoginController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3U-qf-KJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="LoginController" id="nhK-m0-5CU" customClass="LoginController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eW2-Dx-bMb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,9 +96,8 @@
                         <outlet property="googleLoginButton" destination="XfY-hF-Cty" id="4jw-6Z-WO3"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w3U-qf-KJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471" y="99"/>
+            <point key="canvasLocation" x="-572" y="99"/>
         </scene>
         <!--Users Data Controller-->
         <scene sceneID="hXp-KL-g5Y">
@@ -838,7 +838,7 @@
         <!--New Run Controller-->
         <scene sceneID="avL-eK-hHS">
             <objects>
-                <viewController id="xZ0-NR-iWj" customClass="NewRunController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewRunController" id="xZ0-NR-iWj" customClass="NewRunController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vaA-v3-pAD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1064,7 +1064,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="98G-NW-vjm">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="duz-rz-lUA" customClass="TabBarController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="duz-rz-lUA" customClass="TabBarController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uU0-yT-QEp">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1165,7 +1165,7 @@
         <!--Setting-->
         <scene sceneID="QTc-Tv-5x1">
             <objects>
-                <tableViewController id="YrD-Mi-h0N" sceneMemberID="viewController">
+                <tableViewController id="YrD-Mi-h0N" customClass="SettingController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pzg-fA-XBU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
