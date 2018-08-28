@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
         FirebaseApp.configure()
         
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         // Override point for customization after application launch.
@@ -48,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
         if let error = error {
             print("Faild to log into google" , error)
             return
+        }else{
+            print("Successfully log into google" , user)
         }
-        print("Successfully log into google" , user)
-        
         guard let idToken = user.authentication.idToken else { return }
         guard let accessToken = user.authentication.accessToken else { return }
         let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
@@ -59,20 +58,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
             if let err = error {
                 print("Failed to create a Firebase User with Google account: ", err)
                 return
+            }else{
+                guard let uid = user?.uid else { return }
+                guard let name = user?.displayName else { return }
+                guard let email = user?.email else { return }
+                guard let picture = user?.photoURL else { return }
+                let values = ["email" : email , "name" : name ,"picture" : picture.absoluteString + "?sz=480"] as [String : Any]
+                self.ref = Database.database().reference()
+                self.ref?.child("Users").child(uid).updateChildValues(values)
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
+                usersDataController?.googleID = uid
+                self.window?.rootViewController?.present(usersDataController!, animated: true, completion: nil)
             }
             
-            guard let uid = user?.uid else { return }
-            guard let name = user?.displayName else { return }
-            guard let email = user?.email else { return }
-            guard let picture = user?.photoURL else { return }
-            let values = ["email" : email , "name" : name ,"picture" : picture.absoluteString] as [String : Any]
-            self.ref = Database.database().reference()
-            self.ref?.child("Users").child(uid).updateChildValues(values)
-            
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
-            usersDataController?.googleID = uid
-            self.window?.rootViewController?.present(usersDataController!, animated: true, completion: nil)
         })
         
     }
@@ -97,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         CoreDataStack.saveContext()
-
+        
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -111,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         CoreDataStack.saveContext()
-
+        
     }
     
     

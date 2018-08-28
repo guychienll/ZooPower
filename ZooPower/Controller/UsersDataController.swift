@@ -80,7 +80,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
             googleUserPicture()
         }
         
-      
+    
         // userName automatically load 使用者名稱自動代入
             automaticallyLoadUserName()
         //觀察popup動靜
@@ -167,8 +167,19 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     
     //Update User's Data to Firebase ( PictureURL , Birthday , Height , Weight , Gender )
     @IBAction func okButton(_ sender: Any) {
-            let uploadData = self.userImageView.image?.pngData()
-            //upload image to firebase storage
+        
+        guard self.userBirthdayTextField.text != "" , self.userHeightTextField.text  != "" , self.userWeightTextField.text != "" else {
+            let alert = UIAlertController(title: "Error",
+                                          message: "Sorry , you have to fill up all yor data !",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+            return
+        }
+        
+        
+        let uploadData = self.userImageView.image?.pngData()
+        //upload image to firebase storage
             storageRef?.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
                 if error != nil{
                     print(error ?? "")
@@ -181,7 +192,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
                         return
                     }
                     if let profileImageUrl = url?.absoluteString {
-                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text ?? "" , "height" : self.userHeightTextField.text ?? "" , "weight" : self.userWeightTextField.text ?? "" , "gender" : self.gender] as [AnyHashable : Any]
+                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text , "height" : self.userHeightTextField.text , "weight" :self.userWeightTextField.text , "gender" : self.gender] as [AnyHashable : Any]
                         self.ref?.child("Users/\(self.currentID!)").updateChildValues(values)
                     }
                 })

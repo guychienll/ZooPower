@@ -44,13 +44,13 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
         
         switch indexPath.row {
         case 0:
-            cell?.areaButton.backgroundColor = UIColor.init(red: 158/255, green: 186/255, blue: 232/255, alpha: 1)
+            cell?.areaButton.setBackgroundImage(UIImage(named: "海洋區背景"), for: .normal)
         case 1:
-            cell?.areaButton.backgroundColor = UIColor.init(red: 155/255, green: 222/255, blue: 161/255, alpha: 1)
+            cell?.areaButton.setBackgroundImage(UIImage(named: "草原區背景"), for: .normal)
         case 2:
-            cell?.areaButton.backgroundColor = UIColor.init(red: 245/255, green: 187/255, blue: 131/255, alpha: 1)
+            cell?.areaButton.setBackgroundImage(UIImage(named: "雨林區背景"), for: .normal)
         case 3:
-            cell?.areaButton.backgroundColor = UIColor.init(red: 201/255, green: 132/255, blue: 216/255, alpha: 1)
+            cell?.areaButton.setBackgroundImage(UIImage(named: "特區背景"), for: .normal)
         default:
             print("something wrong")
         }

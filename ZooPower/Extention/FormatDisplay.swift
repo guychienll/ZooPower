@@ -41,4 +41,11 @@ struct FormatDisplay {
         formatter.dateStyle = .medium
         return formatter.string(from: timestamp)
     }
+    
+    static func calorie(_ calories: Double) -> String {
+        let formatter = MeasurementFormatter()
+        formatter.unitOptions = [.providedUnit]
+        let caloriesFormatted = Measurement(value: calories, unit: UnitEnergy.kilocalories)
+        return formatter.string(from: caloriesFormatted)
+    }
 }

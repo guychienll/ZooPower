@@ -39,7 +39,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     func showEmailAddress(){
@@ -103,5 +103,6 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
         GIDSignIn.sharedInstance()?.signIn()
         UserDefaults.standard.set(1, forKey: "checkLogIn")
         UserDefaults.standard.synchronize()
+        
     }
 }

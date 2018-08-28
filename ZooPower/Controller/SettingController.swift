@@ -11,9 +11,11 @@ import Firebase
 
 class SettingController: UITableViewController {
 
+    
+    @IBOutlet weak var notificationSettingButton: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,7 +36,7 @@ class SettingController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+   
         if indexPath.section == 0 && indexPath.row == 6 {
             
             let firebaseAuth = Auth.auth()
@@ -48,6 +50,7 @@ class SettingController: UITableViewController {
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginController") as! LoginController
             present(controller, animated: true, completion: nil)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
 
     }
     /*

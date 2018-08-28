@@ -10,6 +10,25 @@ import UIKit
 
 class ZooCollectionPopController: UIViewController {
 
+    
+    var animalsName : String?
+    var animalsAreaName : String?
+    
+    @IBOutlet weak var animalsNameLabel: UILabel!{
+        didSet{
+            animalsNameLabel.text = animalsName
+        }
+    }
+    @IBOutlet weak var animalsImageView: UIImageView!{
+        didSet{
+            animalsImageView.image = UIImage(named: animalsName!)
+        }
+    }
+    @IBOutlet weak var animalsAreaLabel: UILabel!{
+        didSet{
+            animalsAreaLabel.text = animalsAreaName
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

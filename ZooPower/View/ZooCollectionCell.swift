@@ -17,6 +17,5 @@ class ZooCollectionCell: UICollectionViewCell {
         
         }
     }
-    @IBOutlet weak var animalNameLabel: UILabel!
     
 }

@@ -13,7 +13,7 @@ import Firebase
 
 
 class NewRunController: UIViewController , MKMapViewDelegate{
-
+    
     private var run: Run?
     var ref : DatabaseReference?
     private let locationManager = LocationManager.shared
@@ -23,6 +23,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var locationList: [CLLocation] = []
     var demoLocationManager : CLLocationManager!
     var currentID = Auth.auth().currentUser?.uid
+    var calorie : Double?
     @IBOutlet weak var demoMapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -32,7 +33,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
+        
         
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -60,6 +62,9 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         demoMapView.isZoomEnabled = false
         demoMapView.isScrollEnabled = false
         demoMapView.isPitchEnabled = false
+        
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -131,7 +136,42 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         newRun.distance = distance.value
         newRun.duration = Int16(seconds)
         newRun.timestamp = Date()
-        
+        var pace : Double?
+        if String(Double(seconds) / distance.value) == "inf" {
+            pace = 0
+        }else{
+            pace = Double(seconds) / distance.value
+        }
+  
+        Database.database().reference().child("Users/\(currentID!)/weight").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            //取得體重
+            let value = snapshot.value as? String
+            let weight = Double(value!)
+            
+            //計算卡路里
+            self.calorieCompute(weight: weight! , pace : pace!)
+            
+           //四捨五入
+            let roundedDistance = Double(round(1000 * self.distance.value) / 1000)
+            let roundedPace = Double(round(1000 * pace!) / 1000)
+            let roundedCalorie = Double(round(100 * self.calorie!) / 100)
+            
+            //日期格式化
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let myString = formatter.string(from: Date()) // string purpose I add here
+            let yourDate = formatter.date(from: myString)
+            formatter.dateFormat = "dd-MMM-yyyy"
+            let myStringafd = formatter.string(from: yourDate!)
+            
+            
+            
+            //上傳跑步記錄到firebase
+            let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : myStringafd ,"pace" : roundedPace , "calorie" : roundedCalorie] as [AnyHashable : Any]
+            Database.database().reference().child("Records/\(self.currentID!)").childByAutoId().setValue(record)
+        })
+
         for location in locationList {
             let locationObject = Location(context: CoreDataStack.context)
             locationObject.timestamp = location.timestamp
@@ -141,12 +181,39 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         }
         
         CoreDataStack.saveContext()
-        
         run = newRun
-        ref = Database.database().reference()
-        print(self.currentID!)
-        //ref?.child("/Users/\(self.currentID!)/")
-        print(run ?? "default value")
+       
+    }
+    
+    //卡路里計算方法
+    private func calorieCompute(weight:Double , pace : Double){
+        //kalulixiaohao.51240.com
+        switch (distance.value / 1000) / (Double(seconds) / 3600) {
+        case ...8.0:
+            calorie = (pace * distance.value) / 60 * weight * 0.1563
+        case 8.0...8.4:
+            calorie = (pace * distance.value) / 60 * weight * 0.1788
+        case 8.4...9.7:
+            calorie = (pace * distance.value) / 60 * weight * 0.201
+        case 9.7...10.8:
+            calorie = (pace * distance.value) / 60 * weight * 0.2233
+        case 10.8...11.3:
+            calorie = (pace * distance.value) / 60 * weight * 0.2345
+        case 11.3...12.1:
+            calorie = (pace * distance.value) / 60 * weight * 0.2568
+        case 12.1...12.9:
+            calorie = (pace * distance.value) / 60 * weight * 0.2793
+        case 12.9...13.8:
+            calorie = (pace * distance.value) / 60 * weight * 0.2903
+        case 13.8...14.5:
+            calorie = (pace * distance.value) / 60 * weight * 0.3128
+        case 14.5...16.0:
+            calorie = (pace * distance.value) / 60 * weight * 0.335
+        case 16.0...:
+            calorie = (pace * distance.value) / 60 * weight * 0.3798
+        default:
+            print("default")
+        }
     }
     
     private func startRun() {
@@ -185,17 +252,17 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         present(alertController, animated: true)
     }
     
-
+    
     
     // MARK: - Navigation
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? RunDetailsController
         destination?.run = run
     }
     
-
+    
 }
 
 extension NewRunController: CLLocationManagerDelegate {
