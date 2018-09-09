@@ -10,17 +10,7 @@ import UIKit
 
 class RecordCell: UITableViewCell {
 
-    @IBOutlet weak var backgroundCardView: UIView!{
-        didSet{
-            backgroundCardView.backgroundColor = UIColor(red: 197/255, green: 231/255, blue:255/255, alpha: 0.5)
-            contentView.backgroundColor = UIColor(red: 247/255, green: 250/255, blue:255/255, alpha: 0.5)
-            backgroundCardView.layer.cornerRadius = 5.0
-            backgroundCardView.layer.masksToBounds = false
-            backgroundCardView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-            backgroundCardView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            backgroundCardView.layer.shadowOpacity = 2
-        }
-    }
+   
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!

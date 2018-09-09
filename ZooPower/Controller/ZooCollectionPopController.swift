@@ -13,6 +13,14 @@ class ZooCollectionPopController: UIViewController {
     
     var animalsName : String?
     var animalsAreaName : String?
+    var animalsIntro : String?
+    
+    
+    @IBOutlet weak var animalsIntroTextView: UITextView!{
+        didSet{
+            animalsIntroTextView.text = animalsIntro
+        }
+    }
     
     @IBOutlet weak var animalsNameLabel: UILabel!{
         didSet{

@@ -113,12 +113,9 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     }
     
     private func updateDisplay() {
-        let formattedDistance = FormatDisplay.distance(distance)
+        let formattedDistance = Double(round((distance.value / 1000) * 1000) / 1000)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance,
-                                               seconds: seconds,
-                                               outputUnit: UnitSpeed.secondsPerMeter)
-        
+        let formattedPace = Double(round(((Double(seconds) / 60.0) / (distance.value / 1000)) * 1000) / 1000)
         distanceLabel.text = "\(formattedDistance)"
         timeLabel.text = "\(formattedTime)"
         paceLabel.text = "\(formattedPace)"
@@ -156,19 +153,9 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             let roundedDistance = Double(round(1000 * self.distance.value) / 1000)
             let roundedPace = Double(round(1000 * pace!) / 1000)
             let roundedCalorie = Double(round(100 * self.calorie!) / 100)
-            
-            //日期格式化
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let myString = formatter.string(from: Date()) // string purpose I add here
-            let yourDate = formatter.date(from: myString)
-            formatter.dateFormat = "dd-MMM-yyyy"
-            let myStringafd = formatter.string(from: yourDate!)
-            
-            
-            
+      
             //上傳跑步記錄到firebase
-            let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : myStringafd ,"pace" : roundedPace , "calorie" : roundedCalorie] as [AnyHashable : Any]
+            let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : ServerValue.timestamp() ,"pace" : roundedPace , "calorie" : roundedCalorie] as [AnyHashable : Any]
             Database.database().reference().child("Records/\(self.currentID!)").childByAutoId().setValue(record)
         })
 

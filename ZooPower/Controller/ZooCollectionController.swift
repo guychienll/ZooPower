@@ -13,6 +13,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     
     var ref : DatabaseReference?
     var currentID = Auth.auth().currentUser?.uid
+    var accumulatedDistance = 0.0
     @IBOutlet weak var zooCollectionView: UICollectionView!
     
     let animalsImageName_All = [
@@ -21,6 +22,11 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
         ["鱷魚","巨嘴鳥","紅毛猩猩","美洲豹","蜂鳥","樹蛙","蟒蛇","鸚鵡","變色龍","rainforest"] ,
         ["獨角獸","渡渡鳥","special","special","special","special","special","special","special","special"]
     ]
+    
+    let animalsIntro = [ ["藍鯨","小丑魚","藍點魟","海星","豆腐鯊","水母","海龜","寄居蟹","北極熊"] ,
+                         ["斑馬","獅子","瞪羚","犀牛","非洲象","紅鶴","河馬","狐獴","長頸鹿"] ,
+                         ["鱷魚","巨嘴鳥","紅毛猩猩","美洲豹","蜂鳥","樹蛙","蟒蛇","鸚鵡","變色龍"] ,
+                         ["獨角獸","渡渡鳥","special","special","special","special","special","special","special"]]
     
     let animalsAreaName = ["海洋地區","草原地區","雨林地區","特別地區"]
     var animalsImageName_displayed = [String]()
@@ -85,6 +91,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let ZooCollectionPopController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZooCollectionPopController") as? ZooCollectionPopController
         ZooCollectionPopController?.animalsName = animalsImageName_displayed[indexPath.row]
+        ZooCollectionPopController?.animalsIntro = animalsIntro[tab][indexPath.row]
         switch tab {
         case 0:
             ZooCollectionPopController?.animalsAreaName = animalsAreaName[0]
@@ -105,16 +112,20 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     ref = Database.database().reference()
         loadData()
       
     }
     private func loadData(){
+        self.accumulatedDistance = 0.0
         ref?.child("Records/\(currentID!)").observe(.childAdded, with: { (snapshot) in
             let values = snapshot.value as! [String : AnyObject]
             let distanceToKilometers = (values["distance"] as! Double) / 1000
-            self.cnt = self.cnt + (Int(distanceToKilometers) / 5)
+            self.accumulatedDistance += distanceToKilometers
+            self.cnt = self.cnt + (Int(self.accumulatedDistance) / 5)
             self.animalsImageName_displayed = []
+            
             switch self.tab {
             case 0 :
                 for i in 0...8{
