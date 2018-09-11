@@ -10,12 +10,6 @@ import UIKit
 
 class ZooCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var animalImage: UIImageView!{
-        didSet{
-            animalImage.layer.borderWidth = 1
-            animalImage.layer.borderColor = UIColor.white.cgColor
-        
-        }
-    }
+    @IBOutlet weak var animalImage: UIImageView!
     
 }

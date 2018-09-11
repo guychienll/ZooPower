@@ -16,6 +16,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     var accumulatedDistance = 0.0
     @IBOutlet weak var zooCollectionView: UICollectionView!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     let animalsImageName_All = [
         ["藍鯨","小丑魚","藍點魟","海星","豆腐鯊","水母","海龜","寄居蟹","北極熊","ocean"] ,
         ["斑馬","獅子","瞪羚","犀牛","非洲象","紅鶴","河馬","狐獴","長頸鹿","grassland"] ,
@@ -71,17 +72,15 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
         if animalsImageName_displayed.count == 9 {
         cell.animalImage.image = UIImage(named: animalsImageName_displayed[indexPath.row])
         }
-        
-        
         switch tab {
         case 0:
-            collectionView.backgroundColor = UIColor.init(red: 121/255, green: 171/255, blue: 199/255, alpha: 1)
+           backgroundImage.image = UIImage(named: "圖鑒模板海洋")
         case 1:
-            collectionView.backgroundColor = UIColor.init(red: 225/255, green: 153/255, blue: 108/255, alpha: 1)
+         backgroundImage.image = UIImage(named: "圖鑒模板草原")
         case 2:
-            collectionView.backgroundColor =  UIColor.init(red: 128/255, green: 163/255, blue: 76/255, alpha: 1)
+           backgroundImage.image = UIImage(named: "圖鑒模板雨林")
         case 3:
-            collectionView.backgroundColor =  UIColor.init(red: 131/255, green: 112/255, blue: 181/255, alpha: 1)
+            backgroundImage.image = UIImage(named: "圖鑒模板特區")
         default:
             print("something wrong")
         }

@@ -8,11 +8,15 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+import MessageUI
 
-class SettingController: UITableViewController {
+class SettingController: UITableViewController , MFMailComposeViewControllerDelegate {
 
     
     @IBOutlet weak var notificationSettingButton: UITableViewCell!
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,15 @@ class SettingController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
    
+        if indexPath.section == 0 && indexPath.row == 3 {
+            let mailComposeViewController = configureMailController()
+            if MFMailComposeViewController.canSendMail() {
+                self.present(mailComposeViewController, animated: true, completion: nil)
+            }else{
+                showMailError()
+            }
+        }
+        
         if indexPath.section == 0 && indexPath.row == 6 {
             
             let firebaseAuth = Auth.auth()
@@ -52,6 +65,29 @@ class SettingController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
 
+    }
+    
+    func configureMailController() -> MFMailComposeViewController {
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.setToRecipients(["ZooPower@gmail.com"])
+        composeVC.setSubject("回報問題")
+        composeVC.setMessageBody("詳細說明遇到問題，我們將迅速回覆您及解決方法。", isHTML: false)
+        
+        return composeVC
+    }
+    
+    func showMailError() {
+        let sendMailErrorAlert = UIAlertController(title: "Could not send mail ", message: "your device can't send mail", preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "OK", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

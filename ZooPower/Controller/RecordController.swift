@@ -8,8 +8,13 @@
 
 import UIKit
 import Firebase
+import MapKit
+import CoreLocation
+
 
 class RecordController: UITableViewController {
+    
+    var run : Run!
     
     var days = 15
     var aimedDistance = 100.0
@@ -26,28 +31,21 @@ class RecordController: UITableViewController {
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var daysStartButton: UIButton!
     @IBOutlet weak var daysResetButton: UIButton!
-    @IBOutlet weak var daysSlider: UISlider!{
-        didSet{
-            daysSlider.setThumbImage(UIImage(named: "cloud"), for: .normal)
-        }
-    }
+    @IBOutlet weak var daysSlider: UISlider!
     //目標距離元件
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var distanceStartButton: UIButton!
     @IBOutlet weak var distanceResetButton: UIButton!
-    @IBOutlet weak var distanceSlider: UISlider!{
-        didSet{
-            distanceSlider.setThumbImage(UIImage(named: "cloud"), for: .normal)
-        }
-    }
+    @IBOutlet weak var distanceSlider: UISlider!
     
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-       
+        navigationController?.isNavigationBarHidden = true
         Database.database().reference().child("Records/\(currenID!)").queryOrderedByKey().observe(.childAdded) { (snapshot, nil) in
             let value = snapshot.value as? [String : AnyObject]
             
@@ -68,7 +66,16 @@ class RecordController: UITableViewController {
             self.duration.insert(durationString, at: 0)
             self.pace.insert(String(paceString), at: 0)
             self.calories.insert(String(caloriesString), at: 0)
+            self.mapView.delegate = self
+            self.mapView.isZoomEnabled = false
+            //self.mapView.isScrollEnabled = false
+            //self.mapView.isPitchEnabled = false
+            //self.mapView.isRotateEnabled = false
+            if self.run != nil {
+                self.loadMap()
+            }else{
                 
+            }
             
             self.tableView.reloadData()
         }
@@ -102,7 +109,7 @@ class RecordController: UITableViewController {
         return cell
     }
     
-    @IBAction func daysStartButton(_ sender: Any) {
+    @IBAction func startButton(_ sender: Any) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.counter), userInfo: nil, repeats: true)
         
         let currrntTimestamp = NSDate().timeIntervalSince1970
@@ -125,7 +132,7 @@ class RecordController: UITableViewController {
         daysStartButton.isHidden = true
         daysSlider.isEnabled = false
     }
-    @IBAction func daysResetButton(_ sender: Any) {
+    @IBAction func resetButton(_ sender: Any) {
         timer.invalidate()
         days = 1
         daysSlider.setValue(1 ,animated: true)
@@ -159,35 +166,7 @@ class RecordController: UITableViewController {
         }
     }
     
-//    @IBAction func distanceStartButton(_ sender: Any) {
-//        let currrntTimestamp = NSDate().timeIntervalSince1970
-//        Database.database().reference().child("Records/\(currenID!)").observe(.childAdded) { (snapshot) in
-//            let values = snapshot.value as! [String : AnyObject]
-//            let distance = (values["distance"] as! Double) / 1000
-//            let recordsTimestamp = values["date"] as! Double / 1000
-//            if recordsTimestamp > currrntTimestamp {
-//                self.aimedDistance -= distance
-//                self.distanceLabel.text = "\(Double(round(self.aimedDistance * 100) / 100))km"
-//                if self.aimedDistance <= 0 {
-//                    self.distanceLabel.text = "0.0km"
-//                    self.distanceStartButton.isHidden = false
-//                    self.distanceStartButton.isEnabled = false
-//                    self.distanceSlider.isEnabled = true
-//                }
-//            }
-//        }
-//        distanceStartButton.isHidden = true
-//        distanceSlider.isEnabled = false
-//    }
-//    @IBAction func distanceResetButton(_ sender: Any) {
-//        aimedDistance = 100.0
-//        distanceSlider.setValue(100.0 ,animated: true)
-//        distanceLabel.text = "100.0" + "km"
-//        distanceStartButton.isHidden = false
-//        distanceSlider.isEnabled = true
-//        distanceStartButton.isEnabled = true
-//        Database.database().reference().child("Records/\(currenID!)").removeAllObservers()
-//    }
+
     @IBAction func distanceSlider(_ sender: UISlider) {
         aimedDistance = (Double(sender.value).rounded() / 1000) * 1000
         distanceLabel.text = String(aimedDistance)
@@ -195,8 +174,141 @@ class RecordController: UITableViewController {
 
     }
     
+    private func mapRegion() -> MKCoordinateRegion? {
+        guard
+            let locations = run.locations,
+            locations.count > 0
+            else {
+                return nil
+        }
+        
+        let latitudes = locations.map { location -> Double in
+            let location = location as! Location
+            return location.latitude
+        }
+        
+        let longitudes = locations.map { location -> Double in
+            let location = location as! Location
+            return location.longitude
+        }
+        
+        let maxLat = latitudes.max()!
+        let minLat = latitudes.min()!
+        let maxLong = longitudes.max()!
+        let minLong = longitudes.min()!
+        
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
+                                    longitudeDelta: (maxLong - minLong) * 1.3)
+        return MKCoordinateRegion(center: center, span: span)
+    }
+    
+    
+    private func polyLine() -> [MulticolorPolyline] {
+        
+        // 1
+        let locations = run.locations?.array as! [Location]
+        var coordinates: [(CLLocation, CLLocation)] = []
+        var speeds: [Double] = []
+        var minSpeed = Double.greatestFiniteMagnitude
+        var maxSpeed = 0.0
+        
+        // 2
+        for (first, second) in zip(locations, locations.dropFirst()) {
+            let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+            let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
+            coordinates.append((start, end))
+            
+            //3
+            let distance = end.distance(from: start)
+            let time = second.timestamp!.timeIntervalSince(first.timestamp! as Date)
+            let speed = time > 0 ? distance / time : 0
+            speeds.append(speed)
+            minSpeed = min(minSpeed, speed)
+            maxSpeed = max(maxSpeed, speed)
+        }
+        
+        //4
+        let midSpeed = speeds.reduce(0, +) / Double(speeds.count)
+        
+        //5
+        var segments: [MulticolorPolyline] = []
+        for ((start, end), speed) in zip(coordinates, speeds) {
+            let coords = [start.coordinate, end.coordinate]
+            let segment = MulticolorPolyline(coordinates: coords, count: 2)
+            segment.color = segmentColor(speed: speed,
+                                         midSpeed: midSpeed,
+                                         slowestSpeed: minSpeed,
+                                         fastestSpeed: maxSpeed)
+            segments.append(segment)
+        }
+        return segments
+    }
+    
+    private func loadMap() {
+        guard
+            let locations = run.locations,
+            locations.count > 0,
+            let region = mapRegion()
+            else {
+                let alert = UIAlertController(title: "Error",
+                                              message: "Sorry, this run has no locations saved",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                present(alert, animated: true)
+                return
+        }
+        
+        
+        mapView.setRegion(region, animated: true)
+        mapView.addOverlays(polyLine())
+    }
+    
+    private func segmentColor(speed: Double, midSpeed: Double, slowestSpeed: Double, fastestSpeed: Double) -> UIColor {
+        enum BaseColors {
+            static let r_red: CGFloat = 1
+            static let r_green: CGFloat = 20 / 255
+            static let r_blue: CGFloat = 44 / 255
+            
+            static let y_red: CGFloat = 1
+            static let y_green: CGFloat = 215 / 255
+            static let y_blue: CGFloat = 0
+            
+            static let g_red: CGFloat = 0
+            static let g_green: CGFloat = 146 / 255
+            static let g_blue: CGFloat = 78 / 255
+        }
+        
+        let red, green, blue: CGFloat
+        
+        if speed < midSpeed {
+            let ratio = CGFloat((speed - slowestSpeed) / (midSpeed - slowestSpeed))
+            red = BaseColors.r_red + ratio * (BaseColors.y_red - BaseColors.r_red)
+            green = BaseColors.r_green + ratio * (BaseColors.y_green - BaseColors.r_green)
+            blue = BaseColors.r_blue + ratio * (BaseColors.y_blue - BaseColors.r_blue)
+        } else {
+            let ratio = CGFloat((speed - midSpeed) / (fastestSpeed - midSpeed))
+            red = BaseColors.y_red + ratio * (BaseColors.g_red - BaseColors.y_red)
+            green = BaseColors.y_green + ratio * (BaseColors.g_green - BaseColors.y_green)
+            blue = BaseColors.y_blue + ratio * (BaseColors.g_blue - BaseColors.y_blue)
+        }
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+    }
     
     
    
     
+}
+extension RecordController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyline = overlay as? MulticolorPolyline else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.strokeColor = polyline.color
+        renderer.lineWidth = 3
+        return renderer
+    }
 }

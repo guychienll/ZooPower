@@ -20,10 +20,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var seconds = 0
     private var timer: Timer?
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
+    private var oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
     private var locationList: [CLLocation] = []
-    var demoLocationManager : CLLocationManager!
+    //var demoLocationManager : CLLocationManager!
     var currentID = Auth.auth().currentUser?.uid
     var calorie : Double?
+    var region = false
     @IBOutlet weak var demoMapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -41,28 +43,27 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         navigationController?.navigationBar.shadowImage = UIImage()
         
         // Do any additional setup after loading the view.
-        demoLocationManager = CLLocationManager()
-        demoLocationManager.delegate = self
-        demoLocationManager.distanceFilter = kCLLocationAccuracyBestForNavigation
+//        demoLocationManager = CLLocationManager()
+//        demoLocationManager.delegate = self
+//        demoLocationManager.distanceFilter = kCLLocationAccuracyBestForNavigation
         
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationItem.backBarButtonItem?.backgroundImage(for: .normal, barMetrics: .default)
-        
+  
+        // 地圖樣式 // 顯示自身定位位置
         demoMapView.delegate = self
-        
-        // 地圖樣式
         demoMapView.mapType = .standard
-        
-        // 顯示自身定位位置
         demoMapView.showsUserLocation = true
         
         // 允許縮放地圖
-        demoMapView.isZoomEnabled = false
-        demoMapView.isScrollEnabled = false
-        demoMapView.isPitchEnabled = false
-        
+        //demoMapView.isZoomEnabled = false
+//        demoMapView.isScrollEnabled = false
+//        demoMapView.isPitchEnabled = false
+//        demoMapView.isRotateEnabled = false
+        setData()
+        startLocationUpdates()
         
         
     }
@@ -73,10 +74,10 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         if CLLocationManager.authorizationStatus()
             == .notDetermined {
             // 取得定位服務授權
-            demoLocationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
             
             // 開始定位自身位置
-            demoLocationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
         }
             // 使用者已經拒絕定位自身位置權限
         else if CLLocationManager.authorizationStatus()
@@ -96,15 +97,15 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         }
             // 使用者已經同意定位自身位置權限
         else if CLLocationManager.authorizationStatus()
-            == .authorizedWhenInUse {
+            == .authorizedAlways {
             // 開始定位自身位置
-            demoLocationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
     }
     
     func eachSecond() {
@@ -124,7 +125,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private func startLocationUpdates() {
         locationManager.delegate = self
         locationManager.activityType = .fitness
-        locationManager.distanceFilter = 10
+        locationManager.distanceFilter = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
     }
     
@@ -166,7 +167,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             locationObject.longitude = location.coordinate.longitude
             newRun.addToLocations(locationObject)
         }
-        
         CoreDataStack.saveContext()
         run = newRun
        
@@ -211,13 +211,14 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private func stopRun() {
         startButton.isHidden = false
         stopButton.isHidden = true
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
     }
     
     @IBAction func startTapped(_ sender: Any) {
         startRun()
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
+        oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
         locationList.removeAll()
         updateDisplay()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -231,12 +232,97 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
             self.stopRun()
             self.saveRun()
-            self.performSegue(withIdentifier: "RunDetailsController", sender: nil)
+            self.performSegue(withIdentifier: "RecordController", sender: nil)
         }))
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (_) in
             _ = self.navigationController?.popToRootViewController(animated: true)
         }))
         present(alertController, animated: true)
+    }
+    
+    func setData(){
+        if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
+            //海洋區域
+            let ocean = "ocean"
+            let oceanCoordinate = CLLocationCoordinate2DMake(37.703026, -121.759735)
+            let oceanRegionRadius = 100.0
+            let oceanRegion = CLCircularRegion(center: oceanCoordinate, radius: oceanRegionRadius, identifier: ocean)
+            locationManager.startMonitoring(for: oceanRegion)
+            let oceanAnnotation = MKPointAnnotation()
+            oceanAnnotation.coordinate = oceanCoordinate
+            oceanAnnotation.title = "\(ocean)"
+            demoMapView.addAnnotation(oceanAnnotation)
+            let oceanCircle = MKCircle(center: oceanCoordinate, radius: oceanRegionRadius)
+            demoMapView.addOverlay(oceanCircle)
+
+            //草原區域
+//            let grassLand = "grassLand"
+//            let grassLandCoordinate = CLLocationCoordinate2DMake(37.703026, -121.659735)
+//            let grassLandRegionRadius = 100.0
+//            let grassLandRegion = CLCircularRegion(center: grassLandCoordinate, radius: grassLandRegionRadius, identifier: grassLand)
+//            locationManager.startMonitoring(for: grassLandRegion)
+//            let grassLandAnnotation = MKPointAnnotation()
+//            grassLandAnnotation.coordinate = grassLandCoordinate
+//            grassLandAnnotation.title = "\(grassLand)"
+//            demoMapView.addAnnotation(grassLandAnnotation)
+//            let grassLandCircle = MKCircle(center: grassLandCoordinate, radius: grassLandRegionRadius)
+//            demoMapView.addOverlay(grassLandCircle)
+
+            //雨林區域
+//            let rainForest = "rainForest"
+//            let rainForestCoordinate = CLLocationCoordinate2DMake(37.603026, -121.659735)
+//            let rainForestRegionRadius = 100.0
+//            let rainForestRegion = CLCircularRegion(center: rainForestCoordinate, radius: rainForestRegionRadius, identifier: rainForest)
+//            locationManager.startMonitoring(for: rainForestRegion)
+//            let rainForestAnnotation = MKPointAnnotation()
+//            rainForestAnnotation.coordinate = rainForestCoordinate
+//            rainForestAnnotation.title = "\(rainForest)"
+//            demoMapView.addAnnotation(rainForestAnnotation)
+//            let rainForestCircle = MKCircle(center: rainForestCoordinate, radius: rainForestRegionRadius)
+//            demoMapView.addOverlay(rainForestCircle)
+        }
+        else{
+            print("System can't track region!")
+        }
+    }
+    
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        var circleRender = [MKCircleRenderer]()
+        
+        //海洋區域
+        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[0]))
+        circleRender[0].strokeColor = UIColor.blue
+        circleRender[0].fillColor = UIColor(red: 0/256, green: 0/256, blue: 256/256, alpha: 0.2)
+        circleRender[0].lineWidth = 1.0
+        //草原區域
+//        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[1]))
+//        circleRender[1].strokeColor = UIColor.red
+//        circleRender[1].fillColor = UIColor(red: 256/256, green: 0/256, blue: 0/256, alpha: 0.2)
+//        circleRender[1].lineWidth = 1.0
+        //雨林區域
+//        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[1]))
+//        circleRender[2].strokeColor = UIColor.red
+//        circleRender[2].fillColor = UIColor(red: 0/256, green: 256/256, blue: 0/256, alpha: 0.2)
+//        circleRender[2].lineWidth = 1.0
+        
+        return circleRender[0]
+        
+    }
+    
+  
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("enter")
+       self.region = true
+        
+    
+    }
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("exit")
+        self.region = false
     }
     
     
@@ -245,7 +331,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as? RunDetailsController
+        let destination = segue.destination as? RecordController
         destination?.run = run
     }
     
@@ -264,6 +350,13 @@ extension NewRunController: CLLocationManagerDelegate {
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
             }
             
+            if region == true {
+                if let lastLocation = locationList.last {
+                    let delta = newLocation.distance(from: lastLocation)
+                    oceanDistance = oceanDistance + Measurement(value: delta, unit: UnitLength.meters)
+                }
+            }
+            
             locationList.append(newLocation)
         }
         // 印出目前所在位置座標
@@ -271,8 +364,8 @@ extension NewRunController: CLLocationManagerDelegate {
             locations[0] as CLLocation
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
-        let latDelta = 0.001
-        let longDelta = 0.001
+        let latDelta = 0.01
+        let longDelta = 0.01
         let currentLocationSpan:MKCoordinateSpan =
             MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
         

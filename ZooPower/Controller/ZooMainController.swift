@@ -21,6 +21,7 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
         collectionView.isPagingEnabled = true
         //換頁指示條隱藏
         collectionView.showsHorizontalScrollIndicator = false
+
     }
     
     // MARK: UICollectionViewDataSource
