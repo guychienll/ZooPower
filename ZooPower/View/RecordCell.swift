@@ -17,6 +17,9 @@ class RecordCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var calorieLabel: UILabel!
+    @IBOutlet weak var oceanDistanceLabel: UILabel!
+    @IBOutlet weak var grassLandDistanceLabel: UILabel!
+    @IBOutlet weak var rainForestDistanceLabel: UILabel!
     
     
     

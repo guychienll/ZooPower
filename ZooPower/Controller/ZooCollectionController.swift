@@ -14,6 +14,9 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     var ref : DatabaseReference?
     var currentID = Auth.auth().currentUser?.uid
     var accumulatedDistance = 0.0
+    var oceanAccumulatedDistance = 0.0
+    var grassLandAccumulatedDistance = 0.0
+    var rainForestAccumulatedDistance = 0.0
     @IBOutlet weak var zooCollectionView: UICollectionView!
     
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -32,25 +35,27 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     let animalsAreaName = ["海洋地區","草原地區","雨林地區","特別地區"]
     var animalsImageName_displayed = [String]()
     var cnt = 0
-    
+    var oceanCount = 0
+    var grassLandCount = 0
+    var rainForestCount = 0
     // 標籤分頁頁碼
     var tab = 0
     // 海洋
     @IBAction func tab1(_ sender: Any) {
         tab = 0
-        self.cnt = 0
+        self.oceanCount = 0
         loadData()
     }
     // 草原
     @IBAction func tab2(_ sender: Any) {
         tab = 1
-        self.cnt = 0
+        self.grassLandCount = 0
         loadData()
     }
     // 雨林
     @IBAction func tab3(_ sender: Any) {
         tab = 2
-        self.cnt = 0
+        self.rainForestCount = 0
         loadData()
     }
     // 特區
@@ -117,19 +122,40 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
       
     }
     private func loadData(){
-        self.accumulatedDistance = 0.0
+       
+        
         ref?.child("Records/\(currentID!)").observe(.childAdded, with: { (snapshot) in
             let values = snapshot.value as! [String : AnyObject]
+            
+            //各區累積里程數轉單位為公里（海洋、草原、雨林、全區）
+            let oceanDistanceToKilometers = (values["oceanDistance"] as! Double) / 1000
+            let grassLandDistanceToKilometers = (values["grassLandDistance"] as! Double) / 1000
+            let rainForestDistanceToKilometers = (values["rainForestDistance"] as! Double) / 1000
             let distanceToKilometers = (values["distance"] as! Double) / 1000
+            
+            //各區累積里程數歸零（海洋、草原、雨林、全區）
+            self.accumulatedDistance = 0.0
+            self.oceanAccumulatedDistance = 0.0
+            self.grassLandAccumulatedDistance = 0.0
+            self.rainForestAccumulatedDistance = 0.0
+            //各區里程數累積（海洋、草原、雨林、全區）
+            self.oceanAccumulatedDistance += oceanDistanceToKilometers
+            self.grassLandAccumulatedDistance += grassLandDistanceToKilometers
+            self.rainForestAccumulatedDistance += rainForestDistanceToKilometers
             self.accumulatedDistance += distanceToKilometers
+            //各區動物數（海洋、草原、雨林、全區）
+            self.oceanCount = self.oceanCount + (Int(self.oceanAccumulatedDistance) / 5)
+            self.grassLandCount = self.grassLandCount + (Int(self.grassLandAccumulatedDistance) / 5)
+            self.rainForestCount = self.rainForestCount + (Int(self.rainForestAccumulatedDistance) / 5)
             self.cnt = self.cnt + (Int(self.accumulatedDistance) / 5)
+            
             self.animalsImageName_displayed = []
             
             switch self.tab {
             case 0 :
                 for i in 0...8{
                     
-                    if i < self.cnt {
+                    if i < self.oceanCount {
                         self.animalsImageName_displayed.append(self.animalsImageName_All[0][i])
                     }
                     else{
@@ -140,7 +166,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
             case 1 :
                 for i in 0...8{
                     
-                    if i < self.cnt {
+                    if i < self.grassLandCount {
                         self.animalsImageName_displayed.append(self.animalsImageName_All[1][i])
                     }
                     else{
@@ -151,7 +177,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
             case 2 :
                 for i in 0...8{
                     
-                    if i < self.cnt {
+                    if i < self.rainForestCount {
                         self.animalsImageName_displayed.append(self.animalsImageName_All[2][i])
                     }
                     else{

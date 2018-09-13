@@ -21,11 +21,15 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var timer: Timer?
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
+     private var grassLandDistance = Measurement(value: 0, unit: UnitLength.meters)
+     private var rainForestDistance = Measurement(value: 0, unit: UnitLength.meters)
     private var locationList: [CLLocation] = []
     //var demoLocationManager : CLLocationManager!
     var currentID = Auth.auth().currentUser?.uid
     var calorie : Double?
-    var region = false
+    var oceanRegion = false
+    var grassLandRegion = false
+    var rainForestRegion = false
     @IBOutlet weak var demoMapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -35,7 +39,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
         //隱藏navigationbar（透明化）
@@ -58,10 +61,10 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         demoMapView.showsUserLocation = true
         
         // 允許縮放地圖
-        //demoMapView.isZoomEnabled = false
-//        demoMapView.isScrollEnabled = false
-//        demoMapView.isPitchEnabled = false
-//        demoMapView.isRotateEnabled = false
+        demoMapView.isZoomEnabled = false
+        demoMapView.isScrollEnabled = false
+        demoMapView.isPitchEnabled = false
+        demoMapView.isRotateEnabled = false
         setData()
         startLocationUpdates()
         
@@ -135,12 +138,14 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         newRun.duration = Int16(seconds)
         newRun.timestamp = Date()
         var pace : Double?
+        
         if String(Double(seconds) / distance.value) == "inf" {
             pace = 0
         }else{
             pace = Double(seconds) / distance.value
         }
-  
+        
+        
         Database.database().reference().child("Users/\(currentID!)/weight").observeSingleEvent(of: .value, with: { (snapshot) in
             
             //取得體重
@@ -152,11 +157,14 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             
            //四捨五入
             let roundedDistance = Double(round(1000 * self.distance.value) / 1000)
+            let roundedOceanDistance = Double(round(1000 * self.oceanDistance.value) / 1000)
+            let roundedGrassLandDistance = Double(round(1000 * self.grassLandDistance.value) / 1000)
+            let roundedRainForest = Double(round(1000 * self.rainForestDistance.value) / 1000)
             let roundedPace = Double(round(1000 * pace!) / 1000)
             let roundedCalorie = Double(round(100 * self.calorie!) / 100)
       
             //上傳跑步記錄到firebase
-            let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : ServerValue.timestamp() ,"pace" : roundedPace , "calorie" : roundedCalorie] as [AnyHashable : Any]
+            let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : ServerValue.timestamp() ,"pace" : roundedPace , "calorie" : roundedCalorie , "oceanDistance" : roundedOceanDistance , "grassLandDistance" : roundedGrassLandDistance , "rainForestDistance" : roundedRainForest] as [AnyHashable : Any]
             Database.database().reference().child("Records/\(self.currentID!)").childByAutoId().setValue(record)
         })
 
@@ -219,6 +227,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
+        grassLandDistance = Measurement(value: 0, unit: UnitLength.meters)
+        rainForestDistance = Measurement(value: 0, unit: UnitLength.meters)
         locationList.removeAll()
         updateDisplay()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -234,9 +244,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             self.saveRun()
             self.performSegue(withIdentifier: "RecordController", sender: nil)
         }))
-        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (_) in
-            _ = self.navigationController?.popToRootViewController(animated: true)
-        }))
+        
         present(alertController, animated: true)
     }
     
@@ -244,7 +252,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
             //海洋區域
             let ocean = "ocean"
-            let oceanCoordinate = CLLocationCoordinate2DMake(37.703026, -121.759735)
+            let oceanCoordinate = CLLocationCoordinate2DMake(37.702900, -121.754157)
             let oceanRegionRadius = 100.0
             let oceanRegion = CLCircularRegion(center: oceanCoordinate, radius: oceanRegionRadius, identifier: ocean)
             locationManager.startMonitoring(for: oceanRegion)
@@ -256,30 +264,30 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             demoMapView.addOverlay(oceanCircle)
 
             //草原區域
-//            let grassLand = "grassLand"
-//            let grassLandCoordinate = CLLocationCoordinate2DMake(37.703026, -121.659735)
-//            let grassLandRegionRadius = 100.0
-//            let grassLandRegion = CLCircularRegion(center: grassLandCoordinate, radius: grassLandRegionRadius, identifier: grassLand)
-//            locationManager.startMonitoring(for: grassLandRegion)
-//            let grassLandAnnotation = MKPointAnnotation()
-//            grassLandAnnotation.coordinate = grassLandCoordinate
-//            grassLandAnnotation.title = "\(grassLand)"
-//            demoMapView.addAnnotation(grassLandAnnotation)
-//            let grassLandCircle = MKCircle(center: grassLandCoordinate, radius: grassLandRegionRadius)
-//            demoMapView.addOverlay(grassLandCircle)
+            let grassLand = "grassLand"
+            let grassLandCoordinate = CLLocationCoordinate2DMake(37.703011, -121.760170)
+            let grassLandRegionRadius = 100.0
+            let grassLandRegion = CLCircularRegion(center: grassLandCoordinate, radius: grassLandRegionRadius, identifier: grassLand)
+            locationManager.startMonitoring(for: grassLandRegion)
+            let grassLandAnnotation = MKPointAnnotation()
+            grassLandAnnotation.coordinate = grassLandCoordinate
+            grassLandAnnotation.title = "\(grassLand)"
+            demoMapView.addAnnotation(grassLandAnnotation)
+            let grassLandCircle = MKCircle(center: grassLandCoordinate, radius: grassLandRegionRadius)
+            demoMapView.addOverlay(grassLandCircle)
 
             //雨林區域
-//            let rainForest = "rainForest"
-//            let rainForestCoordinate = CLLocationCoordinate2DMake(37.603026, -121.659735)
-//            let rainForestRegionRadius = 100.0
-//            let rainForestRegion = CLCircularRegion(center: rainForestCoordinate, radius: rainForestRegionRadius, identifier: rainForest)
-//            locationManager.startMonitoring(for: rainForestRegion)
-//            let rainForestAnnotation = MKPointAnnotation()
-//            rainForestAnnotation.coordinate = rainForestCoordinate
-//            rainForestAnnotation.title = "\(rainForest)"
-//            demoMapView.addAnnotation(rainForestAnnotation)
-//            let rainForestCircle = MKCircle(center: rainForestCoordinate, radius: rainForestRegionRadius)
-//            demoMapView.addOverlay(rainForestCircle)
+            let rainForest = "rainForest"
+            let rainForestCoordinate = CLLocationCoordinate2DMake(37.702081, -121.767189)
+            let rainForestRegionRadius = 100.0
+            let rainForestRegion = CLCircularRegion(center: rainForestCoordinate, radius: rainForestRegionRadius, identifier: rainForest)
+            locationManager.startMonitoring(for: rainForestRegion)
+            let rainForestAnnotation = MKPointAnnotation()
+            rainForestAnnotation.coordinate = rainForestCoordinate
+            rainForestAnnotation.title = "\(rainForest)"
+            demoMapView.addAnnotation(rainForestAnnotation)
+            let rainForestCircle = MKCircle(center: rainForestCoordinate, radius: rainForestRegionRadius)
+            demoMapView.addOverlay(rainForestCircle)
         }
         else{
             print("System can't track region!")
@@ -290,39 +298,74 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        var circleRender = [MKCircleRenderer]()
+        var regionRenderer = MKCircleRenderer()
         
         //海洋區域
-        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[0]))
-        circleRender[0].strokeColor = UIColor.blue
-        circleRender[0].fillColor = UIColor(red: 0/256, green: 0/256, blue: 256/256, alpha: 0.2)
-        circleRender[0].lineWidth = 1.0
+        if overlay.coordinate.latitude == 37.702900 , overlay.coordinate.longitude == -121.754157{
+            regionRenderer = MKCircleRenderer(overlay: demoMapView.overlays[0])
+            regionRenderer.strokeColor = UIColor.blue
+            regionRenderer.fillColor = UIColor.init(red: 0/256, green: 0/256, blue: 256/256, alpha: 0.2)
+            regionRenderer.lineWidth = 1.0
+        }
         //草原區域
-//        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[1]))
-//        circleRender[1].strokeColor = UIColor.red
-//        circleRender[1].fillColor = UIColor(red: 256/256, green: 0/256, blue: 0/256, alpha: 0.2)
-//        circleRender[1].lineWidth = 1.0
+        else if overlay.coordinate.latitude == 37.703011 , overlay.coordinate.longitude == -121.760170{
+            regionRenderer = MKCircleRenderer(overlay: demoMapView.overlays[1])
+            regionRenderer.strokeColor = UIColor.red
+            regionRenderer.fillColor = UIColor.init(red: 256/256, green: 0/256, blue: 0/256, alpha: 0.2)
+            regionRenderer.lineWidth = 1.0
+        }
         //雨林區域
-//        circleRender.append(MKCircleRenderer(overlay: demoMapView.overlays[1]))
-//        circleRender[2].strokeColor = UIColor.red
-//        circleRender[2].fillColor = UIColor(red: 0/256, green: 256/256, blue: 0/256, alpha: 0.2)
-//        circleRender[2].lineWidth = 1.0
-        
-        return circleRender[0]
-        
+        else if overlay.coordinate.latitude == 37.702081 , overlay.coordinate.longitude == -121.767189{
+            regionRenderer = MKCircleRenderer(overlay: demoMapView.overlays[2])
+            regionRenderer.strokeColor = UIColor.green
+            regionRenderer.fillColor = UIColor.init(red: 0/256, green: 256/256, blue: 0/256, alpha: 0.2)
+            regionRenderer.lineWidth = 1.0
+        }
+
+        return regionRenderer
     }
     
   
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("enter")
-       self.region = true
+      
+        if region.identifier == "ocean"{
+             self.oceanRegion = true
+            let alert = UIAlertController(title: "Enter in Ocean Region", message: "you already entered in Ocean Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }else if region.identifier == "grassLand"{
+            self.grassLandRegion = true
+            let alert = UIAlertController(title: "Enter in grassLand Region", message: "you already entered in grassLand Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }else if region.identifier == "rainForest"{
+            self.rainForestRegion = true
+            let alert = UIAlertController(title: "Enter in rainForest Region", message: "you already entered in rainForest Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }
         
     
     }
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("exit")
-        self.region = false
+        
+        if region.identifier == "ocean"{
+            self.oceanRegion = false
+            let alert = UIAlertController(title: "Exit from Ocean Region", message: "you already exited from Ocean Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }else if region.identifier == "grassLand"{
+            self.grassLandRegion = false
+            let alert = UIAlertController(title: "Exit from grassLand Region", message: "you already exited from grassLand Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }else if region.identifier == "rainForest"{
+            self.rainForestRegion = false
+            let alert = UIAlertController(title: "Exit from rainForest Region", message: "you already exited from rainForest Region", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     
@@ -350,10 +393,20 @@ extension NewRunController: CLLocationManagerDelegate {
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
             }
             
-            if region == true {
+            if self.oceanRegion == true {
                 if let lastLocation = locationList.last {
                     let delta = newLocation.distance(from: lastLocation)
                     oceanDistance = oceanDistance + Measurement(value: delta, unit: UnitLength.meters)
+                }
+            }else if self.grassLandRegion == true {
+                if let lastLocation = locationList.last {
+                    let delta = newLocation.distance(from: lastLocation)
+                    grassLandDistance = grassLandDistance + Measurement(value: delta, unit: UnitLength.meters)
+                }
+            }else if self.rainForestRegion == true {
+                if let lastLocation = locationList.last {
+                    let delta = newLocation.distance(from: lastLocation)
+                    rainForestDistance = rainForestDistance + Measurement(value: delta, unit: UnitLength.meters)
                 }
             }
             

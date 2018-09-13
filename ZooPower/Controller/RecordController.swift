@@ -24,6 +24,9 @@ class RecordController: UITableViewController {
     var date : [String] = []
    // var location = []
     var distance : [String] = []
+    var oceanDistance : [String] = []
+    var grassLandDistance : [String] = []
+    var rainForestDistance : [String] = []
     var duration : [String] = []
     var pace : [String] = []
     var calories : [String] = []
@@ -57,20 +60,28 @@ class RecordController: UITableViewController {
             let dateString = formatter.string(from: date as Date)
             
             let distanceString = Double(round((value!["distance"] as! Double / 1000) * 1000) / 1000)
-            
+            let oceanDistanceString = Double(round((value!["oceanDistance"] as! Double / 1000) * 1000) / 1000)
+            let grassLandDistanceString = Double(round((value!["grassLandDistance"] as! Double / 1000) * 1000) / 1000)
+            let rainForestDistanceString = Double(round((value!["rainForestDistance"] as! Double / 1000) * 1000) / 1000)
+
             let durationString = FormatDisplay.time(value!["duration"] as! Int)
             let paceString = Double(round((((value!["duration"] as! Double) / 60) / distanceString) * 100) / 100)
             let caloriesString = Double(round((value!["calorie"] as! Double) * 100) / 100)
             self.date.insert(dateString, at: 0)
             self.distance.insert(String(distanceString), at: 0)
+            self.oceanDistance.insert(String(oceanDistanceString), at: 0)
+            self.grassLandDistance.insert(String(grassLandDistanceString), at: 0)
+            self.rainForestDistance.insert(String(rainForestDistanceString), at: 0)
             self.duration.insert(durationString, at: 0)
             self.pace.insert(String(paceString), at: 0)
             self.calories.insert(String(caloriesString), at: 0)
+            
             self.mapView.delegate = self
             self.mapView.isZoomEnabled = false
-            //self.mapView.isScrollEnabled = false
-            //self.mapView.isPitchEnabled = false
-            //self.mapView.isRotateEnabled = false
+            self.mapView.isScrollEnabled = false
+            self.mapView.isPitchEnabled = false
+            self.mapView.isRotateEnabled = false
+            
             if self.run != nil {
                 self.loadMap()
             }else{
@@ -103,6 +114,9 @@ class RecordController: UITableViewController {
         cell.dateLabel?.text = date[indexPath.row]
        // cell.locationLabel?.text = location[indexPath.row]
         cell.distanceLabel?.text = distance[indexPath.row]
+        cell.oceanDistanceLabel.text = oceanDistance[indexPath.row]
+        cell.grassLandDistanceLabel.text = grassLandDistance[indexPath.row]
+        cell.rainForestDistanceLabel.text = rainForestDistance[indexPath.row]
         cell.timeLabel?.text = duration[indexPath.row]
         cell.paceLabel?.text = pace[indexPath.row]
         cell.calorieLabel?.text = calories[indexPath.row]

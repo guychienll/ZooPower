@@ -735,7 +735,7 @@
                                             <action selector="closeButton:" destination="Yuf-Mn-iaI" eventType="touchUpInside" id="6Zf-cC-n3h"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="狐獴縮圖" translatesAutoresizingMaskIntoConstraints="NO" id="cyH-r2-erI">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="藍鯨" translatesAutoresizingMaskIntoConstraints="NO" id="cyH-r2-erI">
                                         <rect key="frame" x="41" y="84" width="218" height="204"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <userDefinedRuntimeAttributes>
@@ -1144,8 +1144,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1m-BP-Qs5">
-                                                    <rect key="frame" x="83" y="21" width="141" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="129" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1168,8 +1168,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drb-4B-hy9">
-                                                    <rect key="frame" x="83" y="21" width="167" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="164.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1212,8 +1212,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLv-LA-cNW">
-                                                    <rect key="frame" x="83" y="21" width="121" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="107.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1249,8 +1249,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report Problems" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKD-fV-ZkI">
-                                                    <rect key="frame" x="83" y="21" width="151" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="133" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1280,8 +1280,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4q-Bu-KAx">
-                                                    <rect key="frame" x="83" y="21" width="53" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="45.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1311,8 +1311,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gp-h2-3Pf">
-                                                    <rect key="frame" x="83" y="21" width="42" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="31.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1342,8 +1342,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-kq-puO">
-                                                    <rect key="frame" x="83" y="21" width="72" height="23"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                    <rect key="frame" x="83" y="21" width="61.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1515,14 +1515,38 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="草原" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5s-I7-wUY">
+                                            <rect key="frame" x="267" y="36" width="73" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="雨林" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tY3-Oh-xfL">
+                                            <rect key="frame" x="267" y="55" width="77" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="海洋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvR-Uk-rHb">
+                                            <rect key="frame" x="267" y="17" width="62" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="calorieLabel" destination="tfS-5J-bV8" id="ibn-JD-ANn"/>
                                     <outlet property="dateLabel" destination="tcW-P4-O5O" id="2pN-KP-Zp0"/>
                                     <outlet property="distanceLabel" destination="v9m-u4-k6T" id="N2j-Hq-CjU"/>
+                                    <outlet property="grassLandDistanceLabel" destination="H5s-I7-wUY" id="MKm-xr-VkK"/>
                                     <outlet property="locationLabel" destination="VwZ-T6-1gA" id="caY-WO-hmT"/>
+                                    <outlet property="oceanDistanceLabel" destination="vvR-Uk-rHb" id="R7Q-hA-sJZ"/>
                                     <outlet property="paceLabel" destination="gY1-Az-4zm" id="jCl-YT-yIE"/>
+                                    <outlet property="rainForestDistanceLabel" destination="tY3-Oh-xfL" id="ZWb-Ga-Dbz"/>
                                     <outlet property="timeLabel" destination="ASa-7V-z5B" id="lrJ-80-l6p"/>
                                 </connections>
                             </tableViewCell>
@@ -1542,7 +1566,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spg-pO-IFV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3510" y="834"/>
+            <point key="canvasLocation" x="3509.5999999999999" y="833.43328335832086"/>
         </scene>
         <!--Time Pop Controller-->
         <scene sceneID="CSP-xa-hgq">
@@ -1614,11 +1638,11 @@
         <image name="地圖外框" width="1170" height="650"/>
         <image name="海洋區" width="534" height="349"/>
         <image name="特區" width="444" height="161"/>
-        <image name="狐獴縮圖" width="539" height="539"/>
         <image name="簡介框" width="254" height="138"/>
         <image name="紀錄卡" width="1192" height="667"/>
         <image name="背景" width="750" height="1334"/>
         <image name="草原區" width="498" height="566"/>
+        <image name="藍鯨" width="1000" height="1000"/>
         <image name="記錄滑桿框" width="1214" height="656"/>
         <image name="雨林區" width="408" height="737"/>
     </resources>
