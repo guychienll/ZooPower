@@ -7,19 +7,54 @@
 //
 
 import UIKit
+import Foundation
 
-class timePopController: UIViewController {
-
+class timePopController: UIViewController, UITextFieldDelegate {
+    
+    var timerCount = 0
+    var timerRunning = false
+    
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if timerCount == 0 {
+            timerRunning = false
+        }
     }
     
-    @IBAction func timeSettingButton(_ sender: Any) {
+    //Figure out Count method
+    @objc func Counting() {
+        if timerCount > 0 {
+            print("\(timerCount)")
+            timerCount -= 1
+        } else {
+            print("times up")
+        }
+    }
+    
+    //ADD Action Button
+    @IBAction func okButton(sender: UIButton) {
+        //unwrap textField and Display result
+        if let countebleNumber = Double(textField.text!) {
+            timerCount = Int(countebleNumber*60)
+        }
+    }
+    
+
+    @IBAction func timmerStartCountingDown(sender: Any){
+     if timerRunning == false {
+     _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timePopController.Counting), userInfo: nil, repeats: true)
+     timerRunning = true
+     }
+     }
+    
+    @IBAction func timmerCloseButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
+}
     /*
     // MARK: - Navigation
 
@@ -30,4 +65,3 @@ class timePopController: UIViewController {
     }
     */
 
-}

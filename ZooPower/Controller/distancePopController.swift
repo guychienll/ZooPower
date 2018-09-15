@@ -7,18 +7,55 @@
 //
 
 import UIKit
+import Foundation
 
-class distancePopController: UIViewController {
+class distancePopController: UIViewController, UITextFieldDelegate {
 
+    var distanceCount = 0
+    var distanceRunning = false
+    private var distance = Measurement(value: 0, unit: UnitLength.meters)
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if distanceCount == 0 {
+            distanceRunning = false
+        }
     }
     
-    @IBAction func distanceSettingButton(_ sender: Any) {
+    //Figure out Count method
+    @objc func Counting() {
+        if distanceCount > 0 {
+            print("\(distanceCount)")
+            //get from data from user's run distance
+            distanceCount -= Int(round((distance.value / 1000) * 1000)/1000)
+        } else {
+            print("times up for distance")
+        }
+    }
+    
+    //ADD Action Button
+    @IBAction func okButton(sender: UIButton) {
+        //unwrap textField and Display result
+        if let countebleNumber = Int(textField.text!) {
+            distanceCount = Int(countebleNumber)*1000
+        }
+    }
+    
+    
+    @IBAction func distanceStartCountingDown(sender: Any){
+        if distanceRunning == false {
+            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(distancePopController.Counting), userInfo: nil, repeats: true)
+            distanceRunning = true
+        }
+    }
+    
+    @IBAction func distanceCloseButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+}
     
     /*
     // MARK: - Navigation
@@ -29,5 +66,3 @@ class distancePopController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
