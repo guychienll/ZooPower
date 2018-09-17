@@ -894,16 +894,23 @@
                                 <rect key="frame" x="0.0" y="176" width="173" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="NCd-2m-zke" kind="presentation" id="B7r-ro-q2I"/>
+                                    <segue destination="NCd-2m-zke" kind="presentation" identifier="totimerPopControllersegue" id="B7r-ro-q2I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yai-BG-E3s">
                                 <rect key="frame" x="172" y="176" width="203" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="eTa-Ut-caQ" kind="presentation" id="AF4-EX-yBU"/>
+                                    <segue destination="eTa-Ut-caQ" kind="presentation" identifier="totdistancePopControllersegue" id="AF4-EX-yBU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cc-Ka-NDz">
+                                <rect key="frame" x="251" y="223" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Htp-GK-PWJ"/>
@@ -915,6 +922,7 @@
                     <connections>
                         <outlet property="demoMapView" destination="Kxr-AM-aqx" id="C3w-kP-iSq"/>
                         <outlet property="distanceLabel" destination="yJQ-Zl-uwN" id="gW1-9h-xLY"/>
+                        <outlet property="distancelabel" destination="7cc-Ka-NDz" id="ekj-14-Jhv"/>
                         <outlet property="paceLabel" destination="qaQ-XU-5d1" id="Ndu-C0-XFB"/>
                         <outlet property="startButton" destination="cA7-Hv-CM0" id="rZF-0e-RQu"/>
                         <outlet property="stopButton" destination="SfB-Am-38M" id="ApM-8D-2Wa"/>
@@ -942,26 +950,10 @@
                                 <rect key="frame" x="272" y="367" width="56" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="okButtonWithSender:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="ZGN-Nh-qPn"/>
+                                    <action selector="okButtonWithSender:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="Iiz-oX-Vwd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MP-6I-sNa">
-                                <rect key="frame" x="287" y="253" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="close"/>
-                                <connections>
-                                    <action selector="distanceCloseButton:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="aLb-2U-b3v"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3N-uw-4Ea">
-                                <rect key="frame" x="184" y="367" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="start"/>
-                                <connections>
-                                    <action selector="distanceStartCountingDownWithSender:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="Tt9-to-GJO"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTr-X0-5Bj">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTr-X0-5Bj">
                                 <rect key="frame" x="29" y="291" width="204" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1606,29 +1598,13 @@
                                     <action selector="okButtonWithSender:" destination="NCd-2m-zke" eventType="touchUpInside" id="SZy-Yb-NrL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="60" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOK-Cf-KeR">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOK-Cf-KeR">
                                 <rect key="frame" x="42" y="282" width="189" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQB-zK-5ea">
-                                <rect key="frame" x="283" y="258" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="close"/>
-                                <connections>
-                                    <action selector="timmerCloseButton:" destination="NCd-2m-zke" eventType="touchUpInside" id="SBu-JR-XcF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAp-tZ-SdP">
-                                <rect key="frame" x="186" y="367" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="start"/>
-                                <connections>
-                                    <action selector="timmerStartCountingDownWithSender:" destination="NCd-2m-zke" eventType="touchUpInside" id="Tta-EL-wU2"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="JOp-gm-ORi"/>
@@ -1639,7 +1615,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="us1-lv-zCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5092" y="116"/>
+            <point key="canvasLocation" x="5210" y="116"/>
         </scene>
     </scenes>
     <resources>
