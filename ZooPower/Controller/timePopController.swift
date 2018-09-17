@@ -7,19 +7,34 @@
 //
 
 import UIKit
+import Foundation
 
-class timePopController: UIViewController {
-
+class timePopController: UIViewController, UITextFieldDelegate {
+    
+    var timerCount = 0
+    var timerRunning = false
+    var onSavetimer : ((_ data: Int) -> ())?
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if timerCount == 0 {
+            timerRunning = false
+        }
+    }
+    
+    //ADD Action Button
+    @IBAction func okButton(sender: UIButton) {
+        //unwrap textField and Display result
+        if let countebleNumber = Int(textField.text!) {
+            timerCount = Int(countebleNumber*60)
+        }
+        onSavetimer?(timerCount)
+        
+         dismiss(animated: true, completion: nil)
+    }
 
-        // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func timeSettingButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     /*
     // MARK: - Navigation
 
@@ -29,5 +44,4 @@ class timePopController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

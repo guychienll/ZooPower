@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import Foundation
 
-class distancePopController: UIViewController {
+class distancePopController: UIViewController, UITextFieldDelegate {
 
+    var distanceCount = 0
+    var distanceRunning = false
+    var onSavedistance : ((_ data: Int) -> ())?
+    
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if distanceCount == 0 {
+            distanceRunning = false
+        }
     }
-    
-    @IBAction func distanceSettingButton(_ sender: Any) {
+   
+    @IBAction func okButton(sender: UIButton){
+        //unwrap textField and Display result
+        if let countebleNumber = Int(textField.text!) {
+            distanceCount = Int(countebleNumber)*1000
+        }
+        onSavedistance?(distanceCount)
         dismiss(animated: true, completion: nil)
     }
     
@@ -29,5 +43,4 @@ class distancePopController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

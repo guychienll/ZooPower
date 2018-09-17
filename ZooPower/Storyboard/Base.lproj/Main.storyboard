@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nhK-m0-5CU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nhK-m0-5CU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -894,16 +894,23 @@
                                 <rect key="frame" x="0.0" y="176" width="173" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="NCd-2m-zke" kind="presentation" id="B7r-ro-q2I"/>
+                                    <segue destination="NCd-2m-zke" kind="presentation" identifier="totimerPopControllersegue" id="B7r-ro-q2I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yai-BG-E3s">
                                 <rect key="frame" x="172" y="176" width="203" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="eTa-Ut-caQ" kind="presentation" id="AF4-EX-yBU"/>
+                                    <segue destination="eTa-Ut-caQ" kind="presentation" identifier="totdistancePopControllersegue" id="AF4-EX-yBU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cc-Ka-NDz">
+                                <rect key="frame" x="251" y="223" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Htp-GK-PWJ"/>
@@ -915,6 +922,7 @@
                     <connections>
                         <outlet property="demoMapView" destination="Kxr-AM-aqx" id="C3w-kP-iSq"/>
                         <outlet property="distanceLabel" destination="yJQ-Zl-uwN" id="gW1-9h-xLY"/>
+                        <outlet property="distancelabel" destination="7cc-Ka-NDz" id="ekj-14-Jhv"/>
                         <outlet property="paceLabel" destination="qaQ-XU-5d1" id="Ndu-C0-XFB"/>
                         <outlet property="startButton" destination="cA7-Hv-CM0" id="rZF-0e-RQu"/>
                         <outlet property="stopButton" destination="SfB-Am-38M" id="ApM-8D-2Wa"/>
@@ -938,28 +946,31 @@
                                 <rect key="frame" x="16" y="231" width="343" height="204"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTr-X0-5Bj">
-                                <rect key="frame" x="38" y="282" width="204" height="84"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kq6-UK-atz">
+                                <rect key="frame" x="272" y="367" width="56" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="okButtonWithSender:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="Iiz-oX-Vwd"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTr-X0-5Bj">
+                                <rect key="frame" x="29" y="291" width="204" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kq6-UK-atz">
-                                <rect key="frame" x="272" y="367" width="56" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="distanceSettingButton:" destination="eTa-Ut-caQ" eventType="touchUpInside" id="WfO-gi-4GM"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dB1-Fl-3Jm"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="hTr-X0-5Bj" id="eW7-10-Uqk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMp-iF-acI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4278" y="116"/>
+            <point key="canvasLocation" x="4277.6000000000004" y="115.59220389805098"/>
         </scene>
         <!--Run Details Controller-->
         <scene sceneID="5Rs-FH-BCO">
@@ -1584,10 +1595,10 @@
                                 <rect key="frame" x="270" y="365" width="62" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="timeSettingButton:" destination="NCd-2m-zke" eventType="touchUpInside" id="3IX-4m-xLN"/>
+                                    <action selector="okButtonWithSender:" destination="NCd-2m-zke" eventType="touchUpInside" id="SZy-Yb-NrL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOK-Cf-KeR">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOK-Cf-KeR">
                                 <rect key="frame" x="42" y="282" width="189" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1598,10 +1609,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="JOp-gm-ORi"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="FOK-Cf-KeR" id="Ds8-uR-Sto"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="us1-lv-zCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5092" y="116"/>
+            <point key="canvasLocation" x="5210" y="116"/>
         </scene>
     </scenes>
     <resources>

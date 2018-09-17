@@ -19,6 +19,11 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private let locationManager = LocationManager.shared
     private var seconds = 0
     private var timer: Timer?
+    private var timerRunning = false
+    private var distanceRunning = false
+    var timerCount = 0
+    var distanceCount = 0
+    
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
      private var grassLandDistance = Measurement(value: 0, unit: UnitLength.meters)
@@ -36,6 +41,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
+    @IBOutlet weak var distancelabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +76,13 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         startLocationUpdates()
         
         
+        if timerCount == 0 {
+            timerRunning = false
+        }
+        
+        if distanceCount == 0 {
+            distanceRunning = false
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -114,6 +128,46 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     func eachSecond() {
         seconds += 1
         updateDisplay()
+    }
+    
+    //timer popup setting
+    func onSavetimer(_ data: Int) -> (){
+        //timerLabel.text = String(data)
+        timerCount = data
+    }
+    //distance popup setting
+    func onSavedistance(_ data: Int) -> (){
+        distanceCount = data
+    }
+    
+    @objc func timerCounting(){
+        if timerCount > 0 {
+            print("\(timerCount)")
+            timerCount -= 1
+        } else {
+            print("times up")
+        }
+    }
+    
+    @objc func distanceCounting(){
+        if distanceCount > 0 {
+            print("\(distanceCount)")
+            distanceCount -= Int(distance.value)
+        } else {
+            print("times up for distance")
+        }
+    }
+    func startTimer(){
+        if timerRunning == false {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerCounting), userInfo: nil, repeats: true)
+            timerRunning = true
+        }
+    }
+    func startDistance(){
+        if distanceRunning == false {
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(distanceCounting), userInfo: nil, repeats: true)
+            distanceRunning = true
+        }
     }
     
     private func updateDisplay() {
@@ -235,6 +289,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             self.eachSecond()
         }
         startLocationUpdates()
+        startTimer()
+        startDistance()
     }
     @IBAction func stopTapped(_ sender: Any) {
         let alertController  = UIAlertController(title: "End Run ?", message: "Do you wish to end your run ?", preferredStyle: .actionSheet)
@@ -374,10 +430,26 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as? RecordController
-        destination?.run = run
+        
+        if let identifier = segue.identifier { // 检查是否 nil
+            switch identifier {
+            case "RecordController":
+                if let destination = segue.destination as? RecordController {
+                    destination.run = run
+                }
+            case "totimerPopControllersegue" :
+                if let destination = segue.destination as? timePopController{
+                    destination.onSavetimer = onSavetimer
+                }
+            case "totdistancePopControllersegue" :
+                if let destination = segue.destination as? distancePopController{
+                    destination.onSavedistance = onSavedistance
+                }
+                
+            default: break
+            }
+        }
     }
-    
     
 }
 
