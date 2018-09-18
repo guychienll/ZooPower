@@ -17,8 +17,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var run: Run?
     var ref : DatabaseReference?
     private let locationManager = LocationManager.shared
+    
     private var seconds = 0
     private var timer: Timer?
+    
+    private var aimedTimeTimer : Timer?
+    private var aimedDistanceTimer : Timer?
     private var timerRunning = false
     private var distanceRunning = false
     var timerCount = 0
@@ -42,7 +46,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
-    @IBOutlet weak var distancelabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,9 +122,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             locationManager.startUpdatingLocation()
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
+        aimedTimeTimer?.invalidate()
+        aimedDistanceTimer?.invalidate()
         //locationManager.stopUpdatingLocation()
     }
     
@@ -145,7 +151,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             print("\(timerCount)")
             timerCount -= 1
         } else {
-            print("times up")
+            let alert = UIAlertController(title: "目標時間終止",
+                                          message: "您設定的短期目標時間已達到",preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確定", style: .cancel))
+            present(alert, animated: true)
+            self.timerRunning = false
+            aimedTimeTimer?.invalidate()
         }
     }
     
@@ -154,18 +165,23 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             print("\(distanceCount)")
             distanceCount -= Int(distance.value)
         } else {
-            print("times up for distance")
+            let alert = UIAlertController(title: "目標距離終止",
+                                          message: "您設定的短期目標距離已達到",preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確定", style: .cancel))
+            present(alert, animated: true)
+            self.distanceRunning = false
+            aimedDistanceTimer?.invalidate()
         }
     }
     func startTimer(){
         if timerRunning == false {
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerCounting), userInfo: nil, repeats: true)
+            aimedTimeTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerCounting), userInfo: nil, repeats: true)
             timerRunning = true
         }
     }
     func startDistance(){
         if distanceRunning == false {
-            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(distanceCounting), userInfo: nil, repeats: true)
+            aimedDistanceTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(distanceCounting), userInfo: nil, repeats: true)
             distanceRunning = true
         }
     }
@@ -229,6 +245,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             locationObject.longitude = location.coordinate.longitude
             newRun.addToLocations(locationObject)
         }
+        
+        self.timerRunning = false
+        self.distanceRunning = false
+        timerCount = 0
+        distanceCount = 0
+        
         CoreDataStack.saveContext()
         run = newRun
        
@@ -289,8 +311,13 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             self.eachSecond()
         }
         startLocationUpdates()
-        startTimer()
-        startDistance()
+        
+        if timerCount > 0 {
+            startTimer()
+        }
+        if distanceCount > 0 {
+            startDistance()
+        }
     }
     @IBAction func stopTapped(_ sender: Any) {
         let alertController  = UIAlertController(title: "End Run ?", message: "Do you wish to end your run ?", preferredStyle: .actionSheet)
@@ -300,7 +327,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             self.saveRun()
             self.performSegue(withIdentifier: "RecordController", sender: nil)
         }))
-        
         present(alertController, animated: true)
     }
     
