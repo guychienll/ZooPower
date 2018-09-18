@@ -26,7 +26,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var timerRunning = false
     private var distanceRunning = false
     var timerCount = 0
-    var distanceCount = 0
+    var distanceCount = 0.0
     
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
@@ -142,7 +142,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         timerCount = data
     }
     //distance popup setting
-    func onSavedistance(_ data: Int) -> (){
+    func onSavedistance(_ data: Double) -> (){
         distanceCount = data
     }
     
@@ -162,16 +162,17 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     @objc func distanceCounting(){
         if distanceCount > 0 {
-            print("\(distanceCount)")
-            distanceCount -= Int(distance.value)
-        } else {
-            let alert = UIAlertController(title: "目標距離終止",
-                                          message: "您設定的短期目標距離已達到",preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "確定", style: .cancel))
-            present(alert, animated: true)
-            self.distanceRunning = false
-            aimedDistanceTimer?.invalidate()
+            if distance.value >= distanceCount{
+                let alert = UIAlertController(title: "目標距離終止",
+                                              message: "您設定的短期目標距離已達到",preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "確定", style: .cancel))
+                present(alert, animated: true)
+                self.distanceRunning = false
+                aimedDistanceTimer?.invalidate()
+            }
         }
+        
+        
     }
     func startTimer(){
         if timerRunning == false {
@@ -447,7 +448,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             let alert = UIAlertController(title: "雨林區離開通知", message: "你已離開雨林區", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "確認", style: .cancel))
             present(alert, animated: true, completion: nil)
-            
         }
     }
     

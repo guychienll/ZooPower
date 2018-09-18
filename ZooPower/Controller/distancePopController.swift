@@ -11,9 +11,9 @@ import Foundation
 
 class distancePopController: UIViewController, UITextFieldDelegate {
 
-    var distanceCount = 0
+    var distanceCount = 0.0
     var distanceRunning = false
-    var onSavedistance : ((_ data: Int) -> ())?
+    var onSavedistance : ((_ data: Double) -> ())?
     
     @IBOutlet weak var textField: UITextField!
     
@@ -27,8 +27,8 @@ class distancePopController: UIViewController, UITextFieldDelegate {
    
     @IBAction func okButton(sender: UIButton){
         //unwrap textField and Display result
-        if let countebleNumber = Int(textField.text!) {
-            distanceCount = Int(countebleNumber)*1000
+        if let countebleNumber = Double(textField.text!) {
+            distanceCount = Double(countebleNumber) * 1000
         }
         onSavedistance?(distanceCount)
         dismiss(animated: true, completion: nil)
