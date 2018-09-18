@@ -15,7 +15,7 @@ import CoreLocation
 class RecordController: UITableViewController {
     
     var run : Run!
-    
+    var aimedSetting : UInt?
     var days = 15
     var aimedDistance = 100.0
     var ref : DatabaseReference?
@@ -127,7 +127,7 @@ class RecordController: UITableViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.counter), userInfo: nil, repeats: true)
         
         let currrntTimestamp = NSDate().timeIntervalSince1970
-        Database.database().reference().child("Records/\(currenID!)").observe(.childAdded) { (snapshot) in
+        aimedSetting = Database.database().reference().child("Records/\(currenID!)").observe(.childAdded) { (snapshot) in
             let values = snapshot.value as! [String : AnyObject]
             let distance = (values["distance"] as! Double) / 1000
             let recordsTimestamp = values["date"] as! Double / 1000
@@ -156,7 +156,7 @@ class RecordController: UITableViewController {
         distanceSlider.setValue(1.0 ,animated: true)
         distanceLabel.text = "0.0"
         distanceSlider.isEnabled = true
-        Database.database().reference().child("Records/\(currenID!)").removeAllObservers()
+        Database.database().reference().child("Records/\(currenID!)").removeObserver(withHandle: aimedSetting!)
         
         daysStartButton.isHidden = false
         daysSlider.isEnabled = true

@@ -413,18 +413,18 @@ class NewRunController: UIViewController , MKMapViewDelegate{
       
         if region.identifier == "ocean"{
              self.oceanRegion = true
-            let alert = UIAlertController(title: "Enter in Ocean Region", message: "you already entered in Ocean Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "海洋區進入通知", message: "你已進入海洋區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確定", style: .cancel))
             present(alert, animated: true, completion: nil)
         }else if region.identifier == "grassLand"{
             self.grassLandRegion = true
-            let alert = UIAlertController(title: "Enter in grassLand Region", message: "you already entered in grassLand Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "草原區進入通知", message: "你已進入草原區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確定", style: .cancel))
             present(alert, animated: true, completion: nil)
         }else if region.identifier == "rainForest"{
             self.rainForestRegion = true
-            let alert = UIAlertController(title: "Enter in rainForest Region", message: "you already entered in rainForest Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "雨林區進入通知", message: "你已進入雨林區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確認", style: .cancel))
             present(alert, animated: true, completion: nil)
         }
         
@@ -434,19 +434,20 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         
         if region.identifier == "ocean"{
             self.oceanRegion = false
-            let alert = UIAlertController(title: "Exit from Ocean Region", message: "you already exited from Ocean Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "海洋區離開通知", message: "你已離開海洋區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確認", style: .cancel))
             present(alert, animated: true, completion: nil)
         }else if region.identifier == "grassLand"{
             self.grassLandRegion = false
-            let alert = UIAlertController(title: "Exit from grassLand Region", message: "you already exited from grassLand Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "草原區離開通知", message: "你已離開草原區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確認", style: .cancel))
             present(alert, animated: true, completion: nil)
         }else if region.identifier == "rainForest"{
             self.rainForestRegion = false
-            let alert = UIAlertController(title: "Exit from rainForest Region", message: "you already exited from rainForest Region", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            let alert = UIAlertController(title: "雨林區離開通知", message: "你已離開雨林區", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "確認", style: .cancel))
             present(alert, animated: true, completion: nil)
+            
         }
     }
     

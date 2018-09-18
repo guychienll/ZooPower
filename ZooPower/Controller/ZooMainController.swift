@@ -12,7 +12,7 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
     
     @IBOutlet weak var zooMainCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
-    var areaName = ["海洋地區","草原地區","雨林地區","特別地區"]
+    var areaNameImage = ["海洋地區標題","草原地區標題","雨林地區標題","特區標題"]
     var cellFlag = 0
     
     
@@ -28,7 +28,7 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return areaName.count
+        return areaNameImage.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -41,8 +41,8 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
         
         // Configure the cell
         
-        cell?.areaNameLabel.text = areaName[indexPath.row]
-        
+       
+        cell?.areaNameImageView.image = UIImage(named: areaNameImage[indexPath.row])
         switch indexPath.row {
         case 0:
             cell?.areaButton.setBackgroundImage(UIImage(named: "海洋區背景"), for: .normal)
@@ -64,7 +64,7 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
         let itemWidth = zooMainCollectionViewFlowLayout.itemSize.width
         let proportionalOffset = collectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min(areaName.count - 1, index))
+        let safeIndex = max(0, min(areaNameImage.count - 1, index))
         
         return safeIndex
     }

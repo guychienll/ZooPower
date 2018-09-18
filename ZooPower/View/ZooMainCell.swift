@@ -10,7 +10,7 @@ import UIKit
 class ZooMainCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var areaNameLabel: UILabel!
+    @IBOutlet weak var areaNameImageView: UIImageView!
     @IBOutlet weak var areaButton: UIButton!
     
 }
