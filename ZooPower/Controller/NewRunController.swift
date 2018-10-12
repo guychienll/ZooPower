@@ -50,16 +50,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //隱藏navigationbar（透明化）
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        // Do any additional setup after loading the view.
-//        demoLocationManager = CLLocationManager()
-//        demoLocationManager.delegate = self
-//        demoLocationManager.distanceFilter = kCLLocationAccuracyBestForNavigation
-        
         //隱藏navigationbar（透明化）
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -189,6 +179,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     private func updateDisplay() {
         let formattedDistance = Double(round((distance.value / 1000) * 1000) / 1000)
+        //print(distance.value)
         let formattedTime = FormatDisplay.time(seconds)
         let formattedPace = Double(round(((Double(seconds) / 60.0) / (distance.value / 1000)) * 1000) / 1000)
         distanceLabel.text = "\(formattedDistance)"
@@ -254,7 +245,9 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         
         CoreDataStack.saveContext()
         run = newRun
-       
+        
+        self.performSegue(withIdentifier: "singleRecordController", sender: nil)
+
     }
     
     //卡路里計算方法
@@ -326,7 +319,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
             self.stopRun()
             self.saveRun()
-            self.performSegue(withIdentifier: "RecordController", sender: nil)
+            
         }))
         present(alertController, animated: true)
     }
@@ -338,6 +331,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             let oceanCoordinate = CLLocationCoordinate2DMake(37.702900, -121.754157)
             let oceanRegionRadius = 100.0
             let oceanRegion = CLCircularRegion(center: oceanCoordinate, radius: oceanRegionRadius, identifier: ocean)
+        
             locationManager.startMonitoring(for: oceanRegion)
             let oceanAnnotation = MKPointAnnotation()
             oceanAnnotation.coordinate = oceanCoordinate
@@ -460,8 +454,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         
         if let identifier = segue.identifier { // 检查是否 nil
             switch identifier {
-            case "RecordController":
-                if let destination = segue.destination as? RecordController {
+            case "singleRecordController":
+                if let destination = segue.destination as? singleRecordController {
                     destination.run = run
                 }
             case "totimerPopControllersegue" :

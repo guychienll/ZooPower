@@ -12,5 +12,6 @@ class ZooMainCell: UICollectionViewCell {
     
     @IBOutlet weak var areaNameImageView: UIImageView!
     @IBOutlet weak var areaButton: UIButton!
+    @IBOutlet weak var nextAnimalDistanceLabel: UILabel!
     
 }

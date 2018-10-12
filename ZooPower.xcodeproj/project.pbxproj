@@ -35,12 +35,12 @@
 		1FBCE194212422900030764C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCE193212422900030764C /* CoreDataStack.swift */; };
 		1FBCE197212422DF0030764C /* ZooPower.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCE195212422DF0030764C /* ZooPower.xcdatamodeld */; };
 		1FBCE199212423F90030764C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCE198212423F90030764C /* LocationManager.swift */; };
-		1FBCE19B212424820030764C /* RunDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCE19A212424820030764C /* RunDetailsController.swift */; };
 		1FBCE19D2124268F0030764C /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCE19C2124268F0030764C /* MulticolorPolyline.swift */; };
 		1FDAA8CC211683930040A204 /* ZooMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAA8CB211683930040A204 /* ZooMainController.swift */; };
 		1FDAA8D021168A850040A204 /* ZooMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAA8CF21168A850040A204 /* ZooMainCell.swift */; };
 		1FF899572114C20300E6CD11 /* UIImageViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */; };
 		1FFFE357210D515400E95C4B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFE356210D515400E95C4B /* LoginController.swift */; };
+		22BEEC9C2170695A00AA5A9F /* singleRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,12 +74,12 @@
 		1FBCE193212422900030764C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1FBCE196212422DF0030764C /* ZooPower.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZooPower.xcdatamodel; sourceTree = "<group>"; };
 		1FBCE198212423F90030764C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		1FBCE19A212424820030764C /* RunDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailsController.swift; sourceTree = "<group>"; };
 		1FBCE19C2124268F0030764C /* MulticolorPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		1FDAA8CB211683930040A204 /* ZooMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooMainController.swift; sourceTree = "<group>"; };
 		1FDAA8CF21168A850040A204 /* ZooMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooMainCell.swift; sourceTree = "<group>"; };
 		1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtention.swift; sourceTree = "<group>"; };
 		1FFFE356210D515400E95C4B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleRecordController.swift; sourceTree = "<group>"; };
 		9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.debug.xcconfig"; sourceTree = "<group>"; };
 		B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,10 +168,10 @@
 				1F32009321198F1300D84592 /* ZooCollectionPopController.swift */,
 				1F083811211A6FC4007D0CDD /* DatePopupController.swift */,
 				1F3237FC2121E5F200412A0F /* NewRunController.swift */,
-				1FBCE19A212424820030764C /* RunDetailsController.swift */,
+				1F62E272212870D800D520A8 /* RecordController.swift */,
+				22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */,
 				1F2FF0FE2125E3210066F60A /* TabBarController.swift */,
 				1F62E2702128141A00D520A8 /* SettingController.swift */,
-				1F62E272212870D800D520A8 /* RecordController.swift */,
 				1F3B67BD21451367008C67E1 /* distancePopController.swift */,
 				1F3B67BF214516EE008C67E1 /* timePopController.swift */,
 			);
@@ -365,6 +365,7 @@
 				1FDAA8D021168A850040A204 /* ZooMainCell.swift in Sources */,
 				1F083817211A7CCA007D0CDD /* NotificationNameExtention.swift in Sources */,
 				1F62E2712128141A00D520A8 /* SettingController.swift in Sources */,
+				22BEEC9C2170695A00AA5A9F /* singleRecordController.swift in Sources */,
 				1F3B67BE21451367008C67E1 /* distancePopController.swift in Sources */,
 				1FBCE194212422900030764C /* CoreDataStack.swift in Sources */,
 				1FBCE197212422DF0030764C /* ZooPower.xcdatamodeld in Sources */,
@@ -382,7 +383,6 @@
 				1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */,
 				1F92CE142118384900BCB937 /* ZooCollectionController.swift in Sources */,
 				1F62E275212872C500D520A8 /* RecordCell.swift in Sources */,
-				1FBCE19B212424820030764C /* RunDetailsController.swift in Sources */,
 				1F3B67C0214516EE008C67E1 /* timePopController.swift in Sources */,
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 				1F999E3F2116199000C9A1C0 /* ZooController.swift in Sources */,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nhK-m0-5CU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nhK-m0-5CU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -449,12 +449,27 @@
                                             <rect key="frame" x="101" y="56" width="175" height="93"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xk-tJ-Jxy">
+                                            <rect key="frame" x="183" y="523" width="65" height="49"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="35"/>
+                                            <color key="textColor" red="0.23918017750000001" green="0.27844980359999999" blue="0.30976194140000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfi-Mw-6XD">
+                                            <rect key="frame" x="67" y="523" width="73" height="49"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="35"/>
+                                            <color key="textColor" red="0.23918017750000001" green="0.27844980359999999" blue="0.30976194140000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <size key="customSize" width="377" height="667"/>
                                 <connections>
                                     <outlet property="areaButton" destination="aj5-vA-WoS" id="VB2-4g-mHR"/>
                                     <outlet property="areaNameImageView" destination="Ffo-wI-q55" id="22O-vb-HYS"/>
+                                    <outlet property="nextAnimalDistanceLabel" destination="Pfi-Mw-6XD" id="bwY-4L-Ffw"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -825,7 +840,7 @@
                         <outlet property="startButton" destination="cA7-Hv-CM0" id="rZF-0e-RQu"/>
                         <outlet property="stopButton" destination="SfB-Am-38M" id="ApM-8D-2Wa"/>
                         <outlet property="timeLabel" destination="ddW-JY-xNb" id="dZt-ol-MlB"/>
-                        <segue destination="oB9-jx-iip" kind="show" identifier="RecordController" id="HqH-iQ-OWs"/>
+                        <segue destination="Vaj-Eh-RkL" kind="show" identifier="singleRecordController" id="ppO-bx-a6i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f7-dm-WrR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -869,62 +884,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMp-iF-acI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4277.6000000000004" y="115.59220389805098"/>
-        </scene>
-        <!--Run Details Controller-->
-        <scene sceneID="5Rs-FH-BCO">
-            <objects>
-                <viewController id="90c-iY-KPB" customClass="RunDetailsController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UiB-Kj-LF8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ioe-jy-ET2">
-                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejA-l2-zmY">
-                                <rect key="frame" x="0.0" y="442" width="375" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rN-ld-CZQ">
-                                <rect key="frame" x="0.0" y="486" width="375" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRr-8J-I39">
-                                <rect key="frame" x="0.0" y="530" width="375" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CH-X5-XEi">
-                                <rect key="frame" x="0.0" y="574" width="375" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="76Y-MH-L3d"/>
-                    </view>
-                    <connections>
-                        <outlet property="dateLabel" destination="ejA-l2-zmY" id="kCw-bP-wzA"/>
-                        <outlet property="distanceLabel" destination="7rN-ld-CZQ" id="3f3-Ff-4lL"/>
-                        <outlet property="mapView" destination="Ioe-jy-ET2" id="2iu-K1-Apl"/>
-                        <outlet property="paceLabel" destination="4CH-X5-XEi" id="brH-UH-8iS"/>
-                        <outlet property="timeLabel" destination="eRr-8J-I39" id="UEv-ZD-be0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cTA-P5-KfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4278" y="-599"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="98G-NW-vjm">
@@ -1290,7 +1249,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="87v-A4-6s2" userLabel="header view">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="428"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="記錄滑桿框" translatesAutoresizingMaskIntoConstraints="NO" id="0Kx-0Y-LTt">
@@ -1352,14 +1311,6 @@
                                         <action selector="distanceSlider:" destination="oB9-jx-iip" eventType="valueChanged" id="ln8-DB-DU8"/>
                                     </connections>
                                 </slider>
-                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="H16-yV-CKh">
-                                    <rect key="frame" x="8" y="172" width="359" height="244"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </mapView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="地圖外框" translatesAutoresizingMaskIntoConstraints="NO" id="sEl-dT-pfw">
-                                    <rect key="frame" x="8" y="168" width="359" height="253"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUu-te-vz7">
                                     <rect key="frame" x="176" y="6" width="137" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1372,7 +1323,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="170" id="81V-Mp-ym5" customClass="RecordCell" customModule="ZooPower" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="456" width="375" height="170"/>
+                                <rect key="frame" x="0.0" y="197" width="375" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="81V-Mp-ym5" id="aGv-rS-pqq">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -1462,7 +1413,6 @@
                         <outlet property="daysStartButton" destination="usH-A8-o8X" id="QVW-R0-zh3"/>
                         <outlet property="distanceLabel" destination="7ku-TM-Pbt" id="8bN-4w-xT9"/>
                         <outlet property="distanceSlider" destination="u68-LJ-MyK" id="vQz-MB-HvI"/>
-                        <outlet property="mapView" destination="H16-yV-CKh" id="2CX-xp-FUE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spg-pO-IFV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1506,6 +1456,105 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="us1-lv-zCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5210" y="116"/>
+        </scene>
+        <!--Single Record Controller-->
+        <scene sceneID="FP0-5T-zjm">
+            <objects>
+                <viewController storyboardIdentifier="singleRecordController" id="Vaj-Eh-RkL" customClass="singleRecordController" customModule="ZooPower" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OfB-SQ-B4H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MfG-nM-e7u">
+                                <rect key="frame" x="8" y="122" width="359" height="244"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Vaj-Eh-RkL" id="67z-Ko-bIk"/>
+                                </connections>
+                            </mapView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="地圖外框" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-1t-eqE">
+                                <rect key="frame" x="8" y="118" width="359" height="253"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="記錄卡" translatesAutoresizingMaskIntoConstraints="NO" id="twv-j3-ZAg">
+                                <rect key="frame" x="0.0" y="379" width="375" height="170"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="海洋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fI1-9a-8L8">
+                                <rect key="frame" x="72" y="436" width="62" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQC-Qb-TOk">
+                                <rect key="frame" x="99" y="518" width="87" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="距離" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmG-lP-ne4">
+                                <rect key="frame" x="121" y="476" width="52" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="卡路里" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iek-0a-pwk">
+                                <rect key="frame" x="262" y="518" width="66" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" fixedFrame="YES" text="步速" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKp-b8-YJ8">
+                                <rect key="frame" x="244" y="476" width="76" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="草原" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lU3-4L-9oi">
+                                <rect key="frame" x="179" y="435" width="73" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="雨林" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89K-Pq-f8e">
+                                <rect key="frame" x="290" y="434" width="77" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u09-Tc-CvP">
+                                <rect key="frame" x="16" y="392" width="343" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DJBChalkItUp" family="DJB Chalk It Up" pointSize="25"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8bS-6s-fpm"/>
+                    </view>
+                    <connections>
+                        <outlet property="calorieLabel" destination="iek-0a-pwk" id="BGQ-th-y6n"/>
+                        <outlet property="dateLabel" destination="u09-Tc-CvP" id="kA6-1r-kkJ"/>
+                        <outlet property="distanceLabel" destination="AmG-lP-ne4" id="HXw-bL-QUe"/>
+                        <outlet property="grasslandLabel" destination="lU3-4L-9oi" id="6gY-Lt-XUl"/>
+                        <outlet property="mapView" destination="MfG-nM-e7u" id="GgC-Bd-400"/>
+                        <outlet property="oceanLabel" destination="fI1-9a-8L8" id="IQU-Z7-7Id"/>
+                        <outlet property="paceLabel" destination="jKp-b8-YJ8" id="up3-C6-rUb"/>
+                        <outlet property="rainforestLabel" destination="89K-Pq-f8e" id="1jh-Q5-kx8"/>
+                        <outlet property="timeLabel" destination="xQC-Qb-TOk" id="UJ8-Gx-7aq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6vQ-19-pcw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4278" y="834"/>
         </scene>
     </scenes>
     <resources>
@@ -1553,7 +1602,4 @@
         <image name="記錄滑桿框" width="1214" height="656"/>
         <image name="雨林區" width="408" height="737"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="HqH-iQ-OWs"/>
-    </inferredMetricsTieBreakers>
 </document>

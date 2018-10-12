@@ -1,50 +1,109 @@
 //
-//  RunDetailsController.swift
+//  singleRecordController.swift
 //  ZooPower
 //
-//  Created by User8 on 2018/8/15.
-//  Copyright © 2018年 com.fjuim. All rights reserved.
+//  Created by ZooPower on 2018/10/12.
+//  Copyright © 2018 com.fjuim. All rights reserved.
 //
 
 import UIKit
 import MapKit
-import CoreLocation
+import Firebase
 
-class RunDetailsController: UIViewController {
+class singleRecordController: UIViewController {
 
     var run : Run!
+    var currenID = Auth.auth().currentUser?.uid
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var oceanLabel: UILabel!
+    @IBOutlet weak var grasslandLabel: UILabel!
+    @IBOutlet weak var rainforestLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var calorieLabel: UILabel!
+    
+    
+    var date : [String] = []
+    var distance : [String] = []
+    var oceanDistance : [String] = []
+    var grassLandDistance : [String] = []
+    var rainForestDistance : [String] = []
+    var duration : [String] = []
+    var pace : [String] = []
+    var calories : [String] = []
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var paceLabel: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
-        // Do any additional setup after loading the view.
-        configureView()
+
+        self.mapView.delegate = self
+        self.mapView.isZoomEnabled = false
+        self.mapView.isScrollEnabled = false
+        self.mapView.isPitchEnabled = false
+        self.mapView.isRotateEnabled = false
         
-    }
-    private func configureView(){
-        let distance = Measurement(value: run.distance, unit: UnitLength.meters)
-        let seconds = Int(run.duration)
-        let formattedDistance = FormatDisplay.distance(distance)
-        let formattedDate = FormatDisplay.date(run.timestamp)
-        let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance,
-                                               seconds: seconds,
-                                               outputUnit: UnitSpeed.secondsPerMeter)
+        Database.database().reference().child("Records/\(currenID!)").observe(.childAdded) { (snapshot) in
+            let value = snapshot.value as? [String : AnyObject]
+            
+            let x = value!["date"]! as! Double / 1000
+            let date = NSDate(timeIntervalSince1970: TimeInterval(x))
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            let dateString = formatter.string(from: date as Date)
+            
+            let distanceString = Double(round((value!["distance"] as! Double / 1000) * 1000) / 1000)
+            let oceanDistanceString = Double(round((value!["oceanDistance"] as! Double / 1000) * 1000) / 1000)
+            let grassLandDistanceString = Double(round((value!["grassLandDistance"] as! Double / 1000) * 1000) / 1000)
+            let rainForestDistanceString = Double(round((value!["rainForestDistance"] as! Double / 1000) * 1000) / 1000)
+            
+            let durationString = FormatDisplay.time(value!["duration"] as! Int)
+            let paceString = Double(round((((value!["duration"] as! Double) / 60) / distanceString) * 100) / 100)
+            let caloriesString = Double(round((value!["calorie"] as! Double) * 100) / 100)
+            
+            self.date.insert(dateString, at: 0)
+            self.distance.insert(String(distanceString), at: 0)
+            self.oceanDistance.insert(String(oceanDistanceString), at: 0)
+            self.grassLandDistance.insert(String(grassLandDistanceString), at: 0)
+            self.rainForestDistance.insert(String(rainForestDistanceString), at: 0)
+            self.duration.insert(durationString, at: 0)
+            self.pace.insert(String(paceString), at: 0)
+            self.calories.insert(String(caloriesString), at: 0)
+            
+            self.dateLabel.text = self.date[0]
+            self.distanceLabel.text =  self.distance[0]
+            self.rainforestLabel.text =  self.rainForestDistance[0]
+            self.grasslandLabel.text =  self.grassLandDistance[0]
+            self.oceanLabel.text =  self.oceanDistance[0]
+            self.timeLabel.text =  self.duration[0]
+            self.calorieLabel.text =  self.calories[0]
+            self.paceLabel.text =  self.pace[0]
+        }
         
-        distanceLabel.text = "Distance:  \(formattedDistance)"
-        dateLabel.text = formattedDate
-        timeLabel.text = "Time:  \(formattedTime)"
-        paceLabel.text = "Pace:  \(formattedPace)"
+   
         
-        loadMap()
+        if self.run != nil {
+            self.loadMap()
+        }else{
+            
+        }
+        
     }
     
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
     private func mapRegion() -> MKCoordinateRegion? {
         guard
             let locations = run.locations,
@@ -131,6 +190,7 @@ class RunDetailsController: UIViewController {
                 return
         }
         
+        
         mapView.setRegion(region, animated: true)
         mapView.addOverlays(polyLine())
     }
@@ -167,20 +227,11 @@ class RunDetailsController: UIViewController {
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
 }
-
-extension RunDetailsController: MKMapViewDelegate {
+extension singleRecordController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyline = overlay as? MulticolorPolyline else {
             return MKOverlayRenderer(overlay: overlay)
