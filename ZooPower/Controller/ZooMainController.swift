@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+
 class ZooMainController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var zooMainCollectionViewFlowLayout: UICollectionViewFlowLayout!
@@ -15,10 +16,10 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
     var areaNameImage = ["海洋地區標題","草原地區標題","雨林地區標題","特區標題"]
     var cellFlag = 0
     var currentID = Auth.auth().currentUser?.uid
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
         collectionView.isPagingEnabled = true
         //換頁指示條隱藏
@@ -44,7 +45,6 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ZooMainCell
         
         // Configure the cell
-        
        
         cell?.areaNameImageView.image = UIImage(named: areaNameImage[indexPath.row])
         
@@ -85,6 +85,7 @@ class ZooMainController: UICollectionViewController , UICollectionViewDelegateFl
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.scrollToItem(at: IndexPath.init(row: self.cellFlag, section: 0), at: .centeredHorizontally, animated: false)
+        
     }
    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

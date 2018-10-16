@@ -77,8 +77,8 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             self.id = self.data!["id"]
             self.email = self.data!["email"]
             self.name = self.data!["name"]
-            self.picture = self.data!["picture"]
-            self.values = ["email" : self.email , "name" : self.name , "picture" : self.picture ]
+           // self.picture = self.data!["picture"]
+            self.values = ["email" : self.email , "name" : self.name ]
             
         }
     }

@@ -228,6 +228,18 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             //上傳跑步記錄到firebase
             let record = ["distance" : roundedDistance ,"duration" : self.seconds ,"date" : ServerValue.timestamp() ,"pace" : roundedPace , "calorie" : roundedCalorie , "oceanDistance" : roundedOceanDistance , "grassLandDistance" : roundedGrassLandDistance , "rainForestDistance" : roundedRainForest] as [AnyHashable : Any]
             Database.database().reference().child("Records/\(self.currentID!)").childByAutoId().setValue(record)
+            
+            //billboard value is stored under Users'
+            Database.database().reference().child("Users/\(self.currentID!)/billboard").observeSingleEvent(of: .value, with: { (snapshot) in
+                let billboard = snapshot.value as? Double
+                
+                var billboardvalue = Double(billboard!)
+                //Double(round((roundedDistance / 1000) * 1000) / 1000)
+                billboardvalue = billboardvalue + Double(round((roundedDistance / 1000) * 1000) / 1000)
+                let valuedata = ["billboard" : billboardvalue] as [AnyHashable : Any]
+                Database.database().reference().child("Users/\(self.currentID!)").updateChildValues(valuedata)
+                
+            })
         })
 
         for location in locationList {

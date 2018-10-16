@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
 import MessageUI
 
 class SettingController: UITableViewController , MFMailComposeViewControllerDelegate {
@@ -16,6 +17,7 @@ class SettingController: UITableViewController , MFMailComposeViewControllerDele
     
     @IBOutlet weak var notificationSettingButton: UITableViewCell!
     
+    var a = FBSDKLoginManager()
    
     
     override func viewDidLoad() {
@@ -55,6 +57,7 @@ class SettingController: UITableViewController , MFMailComposeViewControllerDele
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
+                a.logOut()
             } catch let signOutError as NSError {
                 print ("Error signing out: %@", signOutError)
             }

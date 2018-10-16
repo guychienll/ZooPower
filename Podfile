@@ -11,7 +11,6 @@ target 'ZooPower' do
 	pod 'Firebase/Database'
 	pod 'Firebase/Storage'
 	pod 'FBSDKCoreKit'
-	pod 'FBSDKShareKit'
 	pod 'FBSDKLoginKit'
 	pod 'GoogleSignIn'
 	pod 'SwiftGifOrigin', '~> 1.6.1'

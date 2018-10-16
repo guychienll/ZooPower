@@ -40,7 +40,10 @@
 		1FDAA8D021168A850040A204 /* ZooMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAA8CF21168A850040A204 /* ZooMainCell.swift */; };
 		1FF899572114C20300E6CD11 /* UIImageViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */; };
 		1FFFE357210D515400E95C4B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFE356210D515400E95C4B /* LoginController.swift */; };
+		22242DEF2175A1EE0036E960 /* BillboardviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22242DEE2175A1ED0036E960 /* BillboardviewController.swift */; };
 		22BEEC9C2170695A00AA5A9F /* singleRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */; };
+		22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA446E217473F800549E3D /* LimitedTaskController.swift */; };
+		22EA44712174741500549E3D /* LimitedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA44702174741500549E3D /* LimitedTaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +82,10 @@
 		1FDAA8CF21168A850040A204 /* ZooMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZooMainCell.swift; sourceTree = "<group>"; };
 		1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtention.swift; sourceTree = "<group>"; };
 		1FFFE356210D515400E95C4B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		22242DEE2175A1ED0036E960 /* BillboardviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillboardviewController.swift; sourceTree = "<group>"; };
 		22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleRecordController.swift; sourceTree = "<group>"; };
+		22EA446E217473F800549E3D /* LimitedTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskController.swift; sourceTree = "<group>"; };
+		22EA44702174741500549E3D /* LimitedTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskCell.swift; sourceTree = "<group>"; };
 		9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.debug.xcconfig"; sourceTree = "<group>"; };
 		B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +145,7 @@
 				1FDAA8CF21168A850040A204 /* ZooMainCell.swift */,
 				1F92CE152118390A00BCB937 /* ZooCollectionCell.swift */,
 				1F62E274212872C500D520A8 /* RecordCell.swift */,
+				22EA44702174741500549E3D /* LimitedTaskCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +181,8 @@
 				1F62E2702128141A00D520A8 /* SettingController.swift */,
 				1F3B67BD21451367008C67E1 /* distancePopController.swift */,
 				1F3B67BF214516EE008C67E1 /* timePopController.swift */,
+				22EA446E217473F800549E3D /* LimitedTaskController.swift */,
+				22242DEE2175A1ED0036E960 /* BillboardviewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -292,10 +301,10 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -305,10 +314,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -379,11 +388,14 @@
 				1FBCE192212422510030764C /* UnitExtention.swift in Sources */,
 				1FF899572114C20300E6CD11 /* UIImageViewExtention.swift in Sources */,
 				1F92CE162118390A00BCB937 /* ZooCollectionCell.swift in Sources */,
+				22242DEF2175A1EE0036E960 /* BillboardviewController.swift in Sources */,
 				1FBCE199212423F90030764C /* LocationManager.swift in Sources */,
 				1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */,
 				1F92CE142118384900BCB937 /* ZooCollectionController.swift in Sources */,
+				22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */,
 				1F62E275212872C500D520A8 /* RecordCell.swift in Sources */,
 				1F3B67C0214516EE008C67E1 /* timePopController.swift in Sources */,
+				22EA44712174741500549E3D /* LimitedTaskCell.swift in Sources */,
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 				1F999E3F2116199000C9A1C0 /* ZooController.swift in Sources */,
 				1FBCE1902124221A0030764C /* FormatDisplay.swift in Sources */,

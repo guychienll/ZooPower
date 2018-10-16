@@ -18,6 +18,8 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
     var googleID : String = ""
     var currentID = Auth.auth().currentUser?.uid
     var gender : String = "Male"
+    var initializebillboard = 0.0
+
     
     @IBOutlet weak var userDataScrollView: UIScrollView!
     @IBOutlet weak var okButton: UIButton!
@@ -192,7 +194,7 @@ class UsersDataController: UIViewController , UIImagePickerControllerDelegate , 
                         return
                     }
                     if let profileImageUrl = url?.absoluteString {
-                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text , "height" : self.userHeightTextField.text , "weight" :self.userWeightTextField.text , "gender" : self.gender] as [AnyHashable : Any]
+                        let values = ["picture" : profileImageUrl , "birthday" : self.userBirthdayTextField.text , "height" : self.userHeightTextField.text , "weight" :self.userWeightTextField.text , "gender" : self.gender, "billboard" : self.initializebillboard] as [AnyHashable : Any]
                         self.ref?.child("Users/\(self.currentID!)").updateChildValues(values)
                     }
                 })
