@@ -61,7 +61,7 @@ class BillboardviewController: UITableViewController{
         picture.translatesAutoresizingMaskIntoConstraints = false
         picture.layer.borderWidth = 1
         picture.layer.masksToBounds = false
-        picture.layer.borderColor = UIColor.black.cgColor
+        picture.layer.borderColor = UIColor.gray.cgColor
         picture.layer.cornerRadius = picture.frame.height/2
         picture.clipsToBounds = true
         

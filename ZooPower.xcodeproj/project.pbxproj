@@ -43,7 +43,7 @@
 		22242DEF2175A1EE0036E960 /* BillboardviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22242DEE2175A1ED0036E960 /* BillboardviewController.swift */; };
 		22BEEC9C2170695A00AA5A9F /* singleRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */; };
 		22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA446E217473F800549E3D /* LimitedTaskController.swift */; };
-		22EA44712174741500549E3D /* LimitedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA44702174741500549E3D /* LimitedTaskCell.swift */; };
+		364B781B21784ED4006BCA01 /* LimitedTaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B781A21784ED4006BCA01 /* LimitedTaskDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +85,7 @@
 		22242DEE2175A1ED0036E960 /* BillboardviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillboardviewController.swift; sourceTree = "<group>"; };
 		22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleRecordController.swift; sourceTree = "<group>"; };
 		22EA446E217473F800549E3D /* LimitedTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskController.swift; sourceTree = "<group>"; };
-		22EA44702174741500549E3D /* LimitedTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskCell.swift; sourceTree = "<group>"; };
+		364B781A21784ED4006BCA01 /* LimitedTaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskDetailViewController.swift; sourceTree = "<group>"; };
 		9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.debug.xcconfig"; sourceTree = "<group>"; };
 		B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +145,6 @@
 				1FDAA8CF21168A850040A204 /* ZooMainCell.swift */,
 				1F92CE152118390A00BCB937 /* ZooCollectionCell.swift */,
 				1F62E274212872C500D520A8 /* RecordCell.swift */,
-				22EA44702174741500549E3D /* LimitedTaskCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +181,7 @@
 				1F3B67BD21451367008C67E1 /* distancePopController.swift */,
 				1F3B67BF214516EE008C67E1 /* timePopController.swift */,
 				22EA446E217473F800549E3D /* LimitedTaskController.swift */,
+				364B781A21784ED4006BCA01 /* LimitedTaskDetailViewController.swift */,
 				22242DEE2175A1ED0036E960 /* BillboardviewController.swift */,
 			);
 			path = Controller;
@@ -382,6 +382,7 @@
 				1FBCE19D2124268F0030764C /* MulticolorPolyline.swift in Sources */,
 				1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */,
 				1F3237FD2121E5F200412A0F /* NewRunController.swift in Sources */,
+				364B781B21784ED4006BCA01 /* LimitedTaskDetailViewController.swift in Sources */,
 				1F0B0414211AC95E00E95DA7 /* Swift+Gif.swift in Sources */,
 				041461DC2113F10800FDA0E1 /* UsersDataController.swift in Sources */,
 				1F62E273212870D800D520A8 /* RecordController.swift in Sources */,
@@ -395,7 +396,6 @@
 				22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */,
 				1F62E275212872C500D520A8 /* RecordCell.swift in Sources */,
 				1F3B67C0214516EE008C67E1 /* timePopController.swift in Sources */,
-				22EA44712174741500549E3D /* LimitedTaskCell.swift in Sources */,
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
 				1F999E3F2116199000C9A1C0 /* ZooController.swift in Sources */,
 				1FBCE1902124221A0030764C /* FormatDisplay.swift in Sources */,
@@ -547,7 +547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RU645LY46;
+				DEVELOPMENT_TEAM = 6KN2S684A7;
 				INFOPLIST_FILE = ZooPower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -567,7 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RU645LY46;
+				DEVELOPMENT_TEAM = 6KN2S684A7;
 				INFOPLIST_FILE = ZooPower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
