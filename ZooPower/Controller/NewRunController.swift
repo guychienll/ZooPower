@@ -25,8 +25,18 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     private var aimedDistanceTimer : Timer?
     private var timerRunning = false
     private var distanceRunning = false
+    private var taskTimer : Timer?
+    private var taskcomplete = false
     var timerCount = 0
     var distanceCount = 0.0
+    var taskdate = 0
+    var taskendtime = 0
+    //(sec)
+    var taskduration = 0.0
+    //(m)
+    var taskdistance = 0.0
+    var tasksecond = 0
+    var formattedDistance2 = 0
     
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var oceanDistance = Measurement(value: 0, unit: UnitLength.meters)
@@ -76,6 +86,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         if distanceCount == 0 {
             distanceRunning = false
         }
+    
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -118,7 +129,24 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         timer?.invalidate()
         aimedTimeTimer?.invalidate()
         aimedDistanceTimer?.invalidate()
-        //locationManager.stopUpdatingLocation()
+        taskTimer?.invalidate()
+    }
+    
+    func onSavetasktimer2(_ data: Int) -> (){
+        taskdate = data
+        print("tasksate:", taskdate)
+    }
+    func onSavetaskendtime2(_ data: Int) -> (){
+        taskendtime = data
+        print("taskendtime",taskendtime)
+    }
+    func onSavetaskdistance2(_ data: Double) -> (){
+        taskdistance = data
+        print("taskdistance",taskdistance)
+    }
+    func onSavetaskduration2(_ data: Double) -> (){
+        taskduration = data
+        print("taskduration",taskduration)
     }
     
     func eachSecond() {
@@ -128,7 +156,6 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     
     //timer popup setting
     func onSavetimer(_ data: Int) -> (){
-        //timerLabel.text = String(data)
         timerCount = data
     }
     //distance popup setting
@@ -177,7 +204,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         }
     }
     
-    private func updateDisplay() {
+    @objc private func updateDisplay() {
         let formattedDistance = Double(round((distance.value / 1000) * 1000) / 1000)
         //print(distance.value)
         let formattedTime = FormatDisplay.time(seconds)
@@ -185,6 +212,31 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         distanceLabel.text = "\(formattedDistance)"
         timeLabel.text = "\(formattedTime)"
         paceLabel.text = "\(formattedPace)"
+    }
+    
+    @objc func updatefortask(){
+
+            taskTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(starttasking), userInfo: nil, repeats: true)
+    }
+
+    @objc func starttasking(){
+        tasksecond += 1
+        //當下跑步距離(m)
+        formattedDistance2 = Int(round((distance.value / 1000) * 1000))
+        //當下時間戳記
+        let now = Int(NSDate().timeIntervalSince1970)
+        //task complete情況：當下時間<taskendtime: when run's duration(tasksecond) <= taskduration且taskdistance <= run's distance(formattedDistance2)
+        if ((now < taskendtime) && (Int(taskduration) >= Int(tasksecond)) && (Int(taskdistance) <= formattedDistance2)){
+                print("task ok")
+            
+                taskTimer?.invalidate()
+        }
+        //超過任務endtime時間但仍在跑時 1. run's duration(tasksecond)<=taskduration但是formattedDistance < taskdistance 2.tasksecond>taskduration 雖然formattedDistance2 >= taskdistance
+        else if(((now >= taskendtime) && (Int(taskduration) >= Int(tasksecond)) && (Int(taskdistance) > formattedDistance2)) || ((now >= taskendtime) && (Int(taskduration) < Int(tasksecond)) && (Int(taskdistance) <= formattedDistance2))){
+            print("task fail")
+            taskTimer?.invalidate()
+        }
+        
     }
     
     private func startLocationUpdates() {
@@ -234,8 +286,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
                 let billboard = snapshot.value as? Double
                 
                 var billboardvalue = Double(billboard!)
-                //Double(round((roundedDistance / 1000) * 1000) / 1000)
-                billboardvalue = billboardvalue + Double(round((roundedDistance / 1000) * 1000) / 1000)
+                billboardvalue = billboardvalue + Double(round((roundedDistance/1000)*1000)/1000)
                 let valuedata = ["billboard" : billboardvalue] as [AnyHashable : Any]
                 Database.database().reference().child("Users/\(self.currentID!)").updateChildValues(valuedata)
                 
@@ -324,6 +375,12 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         if distanceCount > 0 {
             startDistance()
         }
+    
+        if taskdate > 0{
+            tasksecond = 0
+            updatefortask()
+        }
+        
     }
     @IBAction func stopTapped(_ sender: Any) {
         let alertController  = UIAlertController(title: "End Run ?", message: "Do you wish to end your run ?", preferredStyle: .actionSheet)
@@ -477,6 +534,13 @@ class NewRunController: UIViewController , MKMapViewDelegate{
             case "totdistancePopControllersegue" :
                 if let destination = segue.destination as? distancePopController{
                     destination.onSavedistance = onSavedistance
+                }
+            case "tolimitedtasksegue" :
+                if let destination = segue.destination as? LimitedTaskController{
+                    destination.onSavetasktimer2 = onSavetasktimer2
+                    destination.onSavetaskendtime2 = onSavetaskendtime2
+                    destination.onSavetaskdistance2 = onSavetaskdistance2
+                    destination.onSavetaskduration2 = onSavetaskduration2
                 }
                 
             default: break

@@ -811,7 +811,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="icon_remind"/>
                                 <connections>
-                                    <segue destination="GCi-I3-iHc" kind="presentation" id="BVV-5z-fAq"/>
+                                    <segue destination="GCi-I3-iHc" kind="presentation" identifier="tolimitedtasksegue" id="BVV-5z-fAq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLM-vW-ySV">
@@ -1619,8 +1619,8 @@
                                             <rect key="frame" x="19" y="6" width="336" height="74"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tasknamelabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-cn-xAd">
-                                            <rect key="frame" x="185" y="17" width="150" height="43"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tasknamelabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-cn-xAd">
+                                            <rect key="frame" x="121" y="17" width="150" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1688,7 +1688,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBN-pt-OaZ">
                                         <rect key="frame" x="67" y="444" width="167" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="接受任務按鈕"/>
+                                        <state key="normal" title="challengebutton" image="接受任務按鈕"/>
+                                        <connections>
+                                            <action selector="challenge:" destination="CNB-Nb-Mbm" eventType="touchUpInside" id="vWs-Sv-DEe"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="taskdistanceLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="210-d7-bJU">
                                         <rect key="frame" x="58" y="350" width="202" height="35"/>
@@ -1704,6 +1707,27 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="starttime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lY-dL-jdU">
+                                        <rect key="frame" x="67" y="386" width="153" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="endtime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsN-bG-Hi6">
+                                        <rect key="frame" x="67" y="415" width="153" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Utg-bu-arx">
+                                        <rect key="frame" x="58" y="444" width="187" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89411764709999997" green="0.76470588240000004" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1712,10 +1736,14 @@
                         <viewLayoutGuide key="safeArea" id="qVv-Xe-F82"/>
                     </view>
                     <connections>
+                        <outlet property="taskchallengebutton" destination="IBN-pt-OaZ" id="bFN-gm-DI0"/>
                         <outlet property="taskcontent" destination="cyU-Mo-I5c" id="DE3-T5-Ljf"/>
                         <outlet property="taskdistance" destination="210-d7-bJU" id="DhF-Wn-uag"/>
                         <outlet property="taskduration" destination="bGh-gG-qH5" id="sNE-kE-kIr"/>
+                        <outlet property="taskendtime" destination="AsN-bG-Hi6" id="QEh-6G-trj"/>
+                        <outlet property="tasklevel" destination="Utg-bu-arx" id="GVA-s1-UnX"/>
                         <outlet property="taskname" destination="mgy-8h-qOT" id="XoE-FU-kgL"/>
+                        <outlet property="taskstarttime" destination="9lY-dL-jdU" id="lAS-7Y-4mH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iev-6U-Khm" userLabel="First Responder" sceneMemberID="firstResponder"/>
