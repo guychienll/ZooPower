@@ -13,5 +13,4 @@ target 'ZooPower' do
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
 	pod 'GoogleSignIn'
-	pod 'SwiftGifOrigin', '~> 1.6.1'
 end
