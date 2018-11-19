@@ -51,6 +51,17 @@ class SettingController: UITableViewController , MFMailComposeViewControllerDele
                 showMailError()
             }
         }
+        if indexPath.section == 0 && indexPath.row == 4 {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let aboutUsController = sb.instantiateViewController(withIdentifier: "AboutUsController") as? AboutUsController
+            self.present(aboutUsController!, animated: true, completion: nil)
+        }
+        
+        if indexPath.section == 0 && indexPath.row == 5 {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let problemsController = sb.instantiateViewController(withIdentifier: "ProblemsController") as? ProblemsController
+            self.present(problemsController!, animated: true, completion: nil)
+        }
         
         if indexPath.section == 0 && indexPath.row == 6 {
             
