@@ -36,6 +36,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
     //(m)
     var taskdistance = 0.0
     var tasksecond = 0
+    var taskId = ""
     var formattedDistance2 = 0
     
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
@@ -148,6 +149,10 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         taskduration = data
         print("taskduration",taskduration)
     }
+    func onSavetaskId2(_ data: String) -> (){
+        taskId = data
+        print("taskid",taskId)
+    }
     
     func eachSecond() {
         seconds += 1
@@ -228,7 +233,8 @@ class NewRunController: UIViewController , MKMapViewDelegate{
         //task complete情況：當下時間<taskendtime: when run's duration(tasksecond) <= taskduration且taskdistance <= run's distance(formattedDistance2)
         if ((now < taskendtime) && (Int(taskduration) >= Int(tasksecond)) && (Int(taskdistance) <= formattedDistance2)){
                 print("task ok")
-            
+                print(taskId)
+                Database.database().reference().child("Users/\(self.currentID!)/taskiscomplete").child(taskId).setValue(taskId)
                 taskTimer?.invalidate()
         }
         //超過任務endtime時間但仍在跑時 1. run's duration(tasksecond)<=taskduration但是formattedDistance < taskdistance 2.tasksecond>taskduration 雖然formattedDistance2 >= taskdistance
@@ -541,6 +547,7 @@ class NewRunController: UIViewController , MKMapViewDelegate{
                     destination.onSavetaskendtime2 = onSavetaskendtime2
                     destination.onSavetaskdistance2 = onSavetaskdistance2
                     destination.onSavetaskduration2 = onSavetaskduration2
+                    destination.onSavetaskId2 = onSavetaskId2
                 }
                 
             default: break

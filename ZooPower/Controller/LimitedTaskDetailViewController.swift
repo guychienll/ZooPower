@@ -23,7 +23,7 @@ class LimitedTaskDetailViewController: UIViewController {
     
     var currenID = Auth.auth().currentUser?.uid
     var timer = Timer()
-    var taskIdnum: DatabaseReference!
+    var taskId: String!
     var tasknameString: String!
     var taskdurationString: String!
     var taskdistanceString: String!
@@ -33,6 +33,7 @@ class LimitedTaskDetailViewController: UIViewController {
     var taskStartTimeDouble: Double!
     var taskEndTimeDouble: Double!
     
+    var onSavetaskId : ((_ data: String) -> ())?
     var onSavetasktimer : ((_ data: Int) -> ())?
     var onSavetaskendtime : ((_ data: Int) -> ())?
     var onSavetaskduration : ((_ data: Double) -> ())?
@@ -46,7 +47,7 @@ class LimitedTaskDetailViewController: UIViewController {
         print(Int(taskStartTimeDouble))
         print(Int(date))
         print(Int(taskEndTimeDouble))
-        print(taskIdnum)
+        print(taskId)
         
         taskname.text = tasknameString
         taskduration.text = "限制時間："+taskdurationString+" 分鐘"
@@ -85,6 +86,7 @@ class LimitedTaskDetailViewController: UIViewController {
             onSavetaskdistance?(((self.taskdistanceString as NSString).doubleValue)*1000)
             onSavetaskduration?(((self.taskdurationString as NSString).doubleValue)*60)
             onSavetaskendtime?(Int(taskEndTimeDouble))
+            onSavetaskId?(taskId)
             
             self.taskchallengebutton.isHidden = true
             self.tasklevel.text = "任務進行中"

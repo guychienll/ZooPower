@@ -19,7 +19,7 @@ struct taskstruct{
     let taskEndTimeString : String!
     let taskStartTimeDouble: Double!
     let taskEndTimeDouble: Double!
-    let taskId: DatabaseReference!
+    let taskId: String!
 }
 
 
@@ -30,22 +30,22 @@ class LimitedTaskController: UITableViewController {
     var taskendtime = 0
     var taskduration = 0.0
     var taskdistance = 0.0
+    var taskId = ""
     var onSavetasktimer2 : ((_ data: Int) -> ())?
     var onSavetaskendtime2 : ((_ data: Int) -> ())?
     var onSavetaskduration2 : ((_ data: Double) -> ())?
     var onSavetaskdistance2 : ((_ data: Double) -> ())?
-    var currentID = Auth.auth().currentUser?.uid
-    
+    var onSavetaskId2 : ((_ data: String) -> ())?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
         let ref = Database.database().reference()
-        let taskId = ref.child("Task/\(currentID!)")
         ref.child("Task").observe(.childAdded, with: { (snapshot) in
             
             var value = snapshot.value as! [String : AnyObject]
+            let taskId = snapshot.key as! String
             let taskName = value["taskName"] as! String
             let taskDistance = value["taskDistance"] as! String
             let taskDuration = value["taskDuration"] as! String
@@ -98,6 +98,10 @@ class LimitedTaskController: UITableViewController {
         taskdistance = data
         onSavetaskdistance2?(taskdistance)
     }
+    func onSavetaskId(_ data: String) -> (){
+        taskId = data
+        onSavetaskId2?(taskId)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -118,9 +122,7 @@ class LimitedTaskController: UITableViewController {
         if segue.identifier == "limitedtasksegue",
             let limitedtaskdetail = segue.destination as? LimitedTaskDetailViewController,
             let indexPath = self.tableView.indexPathForSelectedRow{
-            
-            limitedtaskdetail.taskIdnum = taskpost[indexPath.row].taskId
-            
+            limitedtaskdetail.taskId = taskpost[indexPath.row].taskId
             limitedtaskdetail.tasknameString =  taskpost[indexPath.row].taskName
             limitedtaskdetail.taskdurationString = "\(String(taskpost[indexPath.row].taskDuration))"
             limitedtaskdetail.taskdistanceString = "\(String(taskpost[indexPath.row].taskDistance))"
@@ -135,6 +137,7 @@ class LimitedTaskController: UITableViewController {
             limitedtaskdetail.onSavetaskendtime = onSavetaskendtime
             limitedtaskdetail.onSavetaskduration = onSavetaskduration
             limitedtaskdetail.onSavetaskdistance = onSavetaskdistance
+            limitedtaskdetail.onSavetaskId = onSavetaskId
         }
         
     }
