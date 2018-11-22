@@ -46,6 +46,18 @@
 		22BEEC9C2170695A00AA5A9F /* singleRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */; };
 		22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA446E217473F800549E3D /* LimitedTaskController.swift */; };
 		364B781B21784ED4006BCA01 /* LimitedTaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B781A21784ED4006BCA01 /* LimitedTaskDetailViewController.swift */; };
+		61BEDF4921A6716C00A8F61F /* FriendTBD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4521A6716C00A8F61F /* FriendTBD.swift */; };
+		61BEDF4A21A6716C00A8F61F /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4621A6716C00A8F61F /* Users.swift */; };
+		61BEDF4B21A6716C00A8F61F /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4721A6716C00A8F61F /* Messages.swift */; };
+		61BEDF4C21A6716C00A8F61F /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4821A6716C00A8F61F /* Friend.swift */; };
+		61BEDF5321A6718200A8F61F /* TbdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4D21A6718200A8F61F /* TbdController.swift */; };
+		61BEDF5421A6718200A8F61F /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4E21A6718200A8F61F /* MessageCell.swift */; };
+		61BEDF5521A6718300A8F61F /* AddfriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF4F21A6718200A8F61F /* AddfriendController.swift */; };
+		61BEDF5621A6718300A8F61F /* ChatLogControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF5021A6718200A8F61F /* ChatLogControl.swift */; };
+		61BEDF5721A6718300A8F61F /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF5121A6718200A8F61F /* MessageController.swift */; };
+		61BEDF5821A6718300A8F61F /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF5221A6718200A8F61F /* ChatController.swift */; };
+		61BEDF5B21A6733600A8F61F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF5921A6733600A8F61F /* UserCell.swift */; };
+		61BEDF5C21A6733600A8F61F /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEDF5A21A6733600A8F61F /* ChatMessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +102,18 @@
 		22BEEC9B2170695A00AA5A9F /* singleRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleRecordController.swift; sourceTree = "<group>"; };
 		22EA446E217473F800549E3D /* LimitedTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskController.swift; sourceTree = "<group>"; };
 		364B781A21784ED4006BCA01 /* LimitedTaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTaskDetailViewController.swift; sourceTree = "<group>"; };
+		61BEDF4521A6716C00A8F61F /* FriendTBD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTBD.swift; sourceTree = "<group>"; };
+		61BEDF4621A6716C00A8F61F /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		61BEDF4721A6716C00A8F61F /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		61BEDF4821A6716C00A8F61F /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		61BEDF4D21A6718200A8F61F /* TbdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TbdController.swift; sourceTree = "<group>"; };
+		61BEDF4E21A6718200A8F61F /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		61BEDF4F21A6718200A8F61F /* AddfriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddfriendController.swift; sourceTree = "<group>"; };
+		61BEDF5021A6718200A8F61F /* ChatLogControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogControl.swift; sourceTree = "<group>"; };
+		61BEDF5121A6718200A8F61F /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		61BEDF5221A6718200A8F61F /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		61BEDF5921A6733600A8F61F /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		61BEDF5A21A6733600A8F61F /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		9A15D8815FFE3780CDE17E70 /* Pods-ZooPower.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.debug.xcconfig"; sourceTree = "<group>"; };
 		B95D6D30A899BDCE2AEBC6B3 /* Pods-ZooPower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPower.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZooPower/Pods-ZooPower.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +169,8 @@
 		1FDAA8CE21168A460040A204 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				61BEDF5A21A6733600A8F61F /* ChatMessageCell.swift */,
+				61BEDF5921A6733600A8F61F /* UserCell.swift */,
 				1FBCE19C2124268F0030764C /* MulticolorPolyline.swift */,
 				1FDAA8CF21168A850040A204 /* ZooMainCell.swift */,
 				1F92CE152118390A00BCB937 /* ZooCollectionCell.swift */,
@@ -156,6 +182,10 @@
 		1FF899582114CF5200E6CD11 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				61BEDF4521A6716C00A8F61F /* FriendTBD.swift */,
+				61BEDF4721A6716C00A8F61F /* Messages.swift */,
+				61BEDF4621A6716C00A8F61F /* Users.swift */,
+				61BEDF4821A6716C00A8F61F /* Friend.swift */,
 				1FF899562114C20300E6CD11 /* UIImageViewExtention.swift */,
 				1F083816211A7CCA007D0CDD /* NotificationNameExtention.swift */,
 				1F0B0413211AC95E00E95DA7 /* Swift+Gif.swift */,
@@ -189,6 +219,12 @@
 				22242DEE2175A1ED0036E960 /* BillboardviewController.swift */,
 				0493F66A21A28A00003D7F55 /* ProblemsController.swift */,
 				0493F66C21A28EBE003D7F55 /* AboutUsController.swift */,
+				61BEDF4F21A6718200A8F61F /* AddfriendController.swift */,
+				61BEDF5221A6718200A8F61F /* ChatController.swift */,
+				61BEDF5021A6718200A8F61F /* ChatLogControl.swift */,
+				61BEDF4E21A6718200A8F61F /* MessageCell.swift */,
+				61BEDF5121A6718200A8F61F /* MessageController.swift */,
+				61BEDF4D21A6718200A8F61F /* TbdController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -387,19 +423,31 @@
 				1FBCE19D2124268F0030764C /* MulticolorPolyline.swift in Sources */,
 				1F083812211A6FC4007D0CDD /* DatePopupController.swift in Sources */,
 				1F3237FD2121E5F200412A0F /* NewRunController.swift in Sources */,
+				61BEDF5721A6718300A8F61F /* MessageController.swift in Sources */,
+				61BEDF5B21A6733600A8F61F /* UserCell.swift in Sources */,
 				364B781B21784ED4006BCA01 /* LimitedTaskDetailViewController.swift in Sources */,
 				1F0B0414211AC95E00E95DA7 /* Swift+Gif.swift in Sources */,
+				61BEDF4C21A6716C00A8F61F /* Friend.swift in Sources */,
 				041461DC2113F10800FDA0E1 /* UsersDataController.swift in Sources */,
 				1F62E273212870D800D520A8 /* RecordController.swift in Sources */,
+				61BEDF4B21A6716C00A8F61F /* Messages.swift in Sources */,
+				61BEDF4921A6716C00A8F61F /* FriendTBD.swift in Sources */,
 				1FBCE192212422510030764C /* UnitExtention.swift in Sources */,
 				1FF899572114C20300E6CD11 /* UIImageViewExtention.swift in Sources */,
+				61BEDF5821A6718300A8F61F /* ChatController.swift in Sources */,
+				61BEDF5321A6718200A8F61F /* TbdController.swift in Sources */,
 				1F92CE162118390A00BCB937 /* ZooCollectionCell.swift in Sources */,
 				22242DEF2175A1EE0036E960 /* BillboardviewController.swift in Sources */,
 				1FBCE199212423F90030764C /* LocationManager.swift in Sources */,
+				61BEDF5C21A6733600A8F61F /* ChatMessageCell.swift in Sources */,
+				61BEDF5621A6718300A8F61F /* ChatLogControl.swift in Sources */,
 				1F73039A210D4E610014BE1D /* AppDelegate.swift in Sources */,
 				1F92CE142118384900BCB937 /* ZooCollectionController.swift in Sources */,
 				22EA446F217473F800549E3D /* LimitedTaskController.swift in Sources */,
+				61BEDF5421A6718200A8F61F /* MessageCell.swift in Sources */,
+				61BEDF4A21A6716C00A8F61F /* Users.swift in Sources */,
 				0493F66D21A28EBF003D7F55 /* AboutUsController.swift in Sources */,
+				61BEDF5521A6718300A8F61F /* AddfriendController.swift in Sources */,
 				1F62E275212872C500D520A8 /* RecordCell.swift in Sources */,
 				1F3B67C0214516EE008C67E1 /* timePopController.swift in Sources */,
 				1FFFE357210D515400E95C4B /* LoginController.swift in Sources */,
