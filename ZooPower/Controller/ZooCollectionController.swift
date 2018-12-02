@@ -133,6 +133,7 @@ class ZooCollectionController: UIViewController , UICollectionViewDelegate , UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        backgroundImage.image = UIImage(named: animalsAreaBackgroundName[tab])
         animalsLoads()
         RecordLoad()
     }
