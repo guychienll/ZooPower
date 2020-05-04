@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
         
         FirebaseApp.configure()
         
-        FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         // Override point for customization after application launch.
@@ -59,10 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
                 print("Failed to create a Firebase User with Google account: ", err)
                 return
             }else{
-                guard let uid = user?.uid else { return }
-                guard let name = user?.displayName else { return }
-                guard let email = user?.email else { return }
-                guard let picture = user?.photoURL else { return }
+                guard let uid = user?.user.uid else { return }
+                guard let name = user?.user.displayName else { return }
+                guard let email = user?.user.email else { return }
+                guard let picture = user?.user.photoURL else { return }
                 let values = ["email" : email , "name" : name ,"picture" : picture.absoluteString + "?sz=480"] as [String : Any]
                 self.ref = Database.database().reference()
                 self.ref?.child("Users").child(uid).updateChildValues(values)
@@ -78,11 +78,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate  {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        let handled = ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
         
-        GIDSignIn.sharedInstance().handle(url,
-                                          sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String!,
-                                          annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        GIDSignIn.sharedInstance().handle(url)
         
         return handled
     }

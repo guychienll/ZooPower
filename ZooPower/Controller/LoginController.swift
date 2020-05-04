@@ -15,7 +15,7 @@ import GoogleSignIn
 
 
 
-class LoginController: UIViewController , GIDSignInUIDelegate {
+class LoginController: UIViewController  {
     
     var ref : DatabaseReference?
     var currentID : String?
@@ -45,7 +45,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
     func showEmailAddress(){
         
         // Firebase Auth
-        let accessToken = FBSDKAccessToken.current()
+        let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.tokenString else { return }
         
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
@@ -57,7 +57,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             print("Successfully logged in with our user: ", user ?? "")
             self.currentID = Auth.auth().currentUser?.uid
             self.ref = Database.database().reference()
-            self.ref?.child("Users").child(self.currentID!).updateChildValues(self.values as! [AnyHashable : Any])
+            self.ref?.child("Users").child(self.currentID!).updateChildValues(self.values!)
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let usersDataController = sb.instantiateViewController(withIdentifier: "UsersDataController") as? UsersDataController
             usersDataController?.facebookID = self.id as! String
@@ -65,7 +65,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
             
         })
         
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email , picture"]).start { (connection, result, err) in
+        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email , picture"]).start { (connection, result, err) in
             
             if err != nil {
                 print("Failed to start graph request:", err ?? "")
@@ -87,7 +87,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
     
     
     @IBAction func facebookLoginButton(_ sender: Any) {
-        FBSDKLoginManager().logIn(withReadPermissions: ["email"], from: self) { (result, err) in
+        LoginManager().logIn(permissions: ["email"], from: self) { (result, err) in
             if err != nil {
                 print("Custom FB Login failed:", err ?? "")
                 return
@@ -99,7 +99,7 @@ class LoginController: UIViewController , GIDSignInUIDelegate {
     }
     
     @IBAction func googleLoginButton(_ sender: Any) {
-        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().presentingViewController = self
         GIDSignIn.sharedInstance()?.signIn()
         UserDefaults.standard.set(1, forKey: "checkLogIn")
         UserDefaults.standard.synchronize()

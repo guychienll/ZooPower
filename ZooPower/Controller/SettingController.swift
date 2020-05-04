@@ -17,7 +17,7 @@ class SettingController: UITableViewController , MFMailComposeViewControllerDele
     
     @IBOutlet weak var notificationSettingButton: UITableViewCell!
     
-    var a = FBSDKLoginManager()
+    var a = LoginManager()
    
     
     override func viewDidLoad() {
